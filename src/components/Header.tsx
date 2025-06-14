@@ -1,4 +1,5 @@
 
+
 import React from "react";
 import { Search, User } from "lucide-react";
 
@@ -11,12 +12,12 @@ const navLinks = [
 ];
 
 const Header = () => (
-  <header className="w-full flex items-center justify-between px-8 md:px-16 py-5 bg-[#101622]/80 backdrop-blur-sm shadow-lg sticky top-0 z-30 border-b border-[#202A3D]">
-    <div className="flex items-center gap-3">
+  <header className="w-full flex items-center justify-between px-2 md:px-6 py-5 bg-[#101622]/80 backdrop-blur-sm shadow-lg sticky top-0 z-30 border-b border-[#202A3D]">
+    <div className="flex items-center gap-2">
       <img
         src="/lovable-uploads/195b39b9-d0a0-4426-b17f-63d73c98d6d3.png"
         alt="NextNode Logo"
-        className="h-12 w-auto drop-shadow-md"
+        className="h-12 w-auto drop-shadow-md cursor-pointer transition-all duration-200 logo-hover-glow"
         draggable={false}
       />
     </div>

@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -128,4 +127,12 @@ input:focus {
   box-shadow: 0 0 0 2px hsl(var(--primary) / 0.25);
 }
 
-/* ... keep existing code (other Tailwind and utility classes) the same ... */
+/* Glowing effect on logo hover in header */
+.logo-hover-glow {
+  transition: filter 0.3s, box-shadow 0.3s, scale 0.2s;
+}
+.logo-hover-glow:hover {
+  filter: brightness(2.5) drop-shadow(0 0 32px #0ff) drop-shadow(0 0 56px #00ffc6);
+  /* optional: scale up slightly for feedback */
+  transform: scale(1.09);
+}
