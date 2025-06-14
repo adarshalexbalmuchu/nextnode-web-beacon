@@ -3,42 +3,22 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Futuristic Neon Glass Color System & Utilities */
+/* ===== Root color system for Futuristic Glassmorphic Theme ===== */
 @layer base {
   :root {
-    /* Core Colors - Futuristic Palette */
     --background: 218 23% 6%;   /* Deep Space Navy */
-    --foreground: 210 40% 98%;  /* Glass White */
-
-    --card: 220 25% 8%;         
+    --foreground: 210 40% 98%;  /* Almost White */
+    --card: 220 25% 8%;
     --card-foreground: 210 40% 96%;
-
-    --popover: 220 27% 9%;
-    --popover-foreground: 210 40% 98%;
-
     --primary: 180 100% 50%;    /* Neon Teal */
     --primary-foreground: 220 25% 8%;
-
-    --secondary: 220 25% 12%;   
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 220 25% 10%;
-    --muted-foreground: 215 25% 65%;
-
-    --accent: 180 100% 50%;    
+    --accent: 180 100% 50%;
     --accent-foreground: 220 25% 8%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 220 25% 15%;      
-    --input: 220 25% 12%;
-    --ring: 180 100% 50%;
-
-    --radius: 0.75rem;
-    --glow: 180 100% 50%;
+    --border: 220 25% 15%;
     --glass: rgba(255,255,255,0.05);
     --glass-border: rgba(255,255,255,0.1);
+    --radius: 0.75rem;
+    --glow: 180 100% 50%;
   }
 
   body {
@@ -48,7 +28,7 @@
   }
 }
 
-/* Glassmorphism Panel Utility */
+/* ===== Glassmorphic Utility ===== */
 @layer components {
   .glass-panel {
     background: var(--glass);
@@ -62,7 +42,6 @@
   }
 }
 
-/* Gradient Background Utility */
 .bg-gradient-futuristic {
   background: linear-gradient(
     120deg,
@@ -79,7 +58,7 @@
   100% { background-position: 0% 50%; }
 }
 
-/* Futuristic Button Style */
+/* ===== Button Glass-Nebula Style ===== */
 .btn-primary {
   background: linear-gradient(90deg, hsl(var(--primary) / 0.85) 0%, hsl(var(--accent) / 0.85) 100%);
   color: hsl(var(--primary-foreground));
@@ -90,14 +69,13 @@
   letter-spacing: 0.02em;
   transition: filter 0.2s, box-shadow 0.2s;
 }
-
 .btn-primary:hover,
 .btn-primary:focus-visible {
   filter: brightness(1.08) saturate(1.2);
   box-shadow: 0 0 24px 0 hsl(var(--primary) / 0.35);
 }
 
-/* Neon Text/Glow */
+/* ===== Neon & Glow Utilities ===== */
 .text-glow {
   text-shadow: 0 0 10px rgba(0,255,255,0.5);
 }
@@ -106,14 +84,29 @@
 }
 
 .brightness-200 {
-  filter: brightness(2) !important;
+  filter: brightness(2);
 }
 .drop-shadow-neon {
   filter:
-    drop-shadow(0 0 50px hsl(var(--primary))) 
+    drop-shadow(0 0 50px hsl(var(--primary)))
     drop-shadow(0 0 100px rgba(0,255,255,0.6));
 }
 
+/* ===== Animated Float Utility for Orbs ===== */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-24px) scale(1.06);
+  }
+}
+.animate-float {
+  animation: float 8s ease-in-out infinite;
+}
+
+/* ===== Inputs & Cards ===== */
 .input,
 input,
 textarea,
@@ -135,4 +128,4 @@ input:focus {
   box-shadow: 0 0 0 2px hsl(var(--primary) / 0.25);
 }
 
-/* ... other Tailwind/animated utility classes unchanged ... */
+/* ... keep existing code (other Tailwind and utility classes) the same ... */

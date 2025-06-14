@@ -1,20 +1,12 @@
 
 import Header from "@/components/Header";
+import Background from "@/components/Background";
 
 const Index = () => {
   return (
-    <div className="min-h-screen w-full flex flex-col bg-gradient-futuristic relative overflow-x-hidden">
-      {/* Subtle grid background */}
-      <div
-        className="absolute inset-0 w-full h-full z-0 pointer-events-none"
-        aria-hidden="true"
-        style={{
-          background:
-            "linear-gradient(0deg, transparent 19px, #0b1a22 20px),linear-gradient(90deg, transparent 19px, #0b1a22 20px)",
-          backgroundSize: "60px 60px",
-          opacity: 0.15,
-        }}
-      ></div>
+    <div className="min-h-screen w-full flex flex-col relative bg-transparent overflow-x-hidden">
+      {/* Futuristic animated background layer */}
+      <Background />
       <Header />
       <main className="flex-1 flex flex-col items-center justify-center px-4 z-10 relative">
         <section className="glass-panel bg-gradient-futuristic w-full max-w-3xl mx-auto flex flex-col items-center mt-20 mb-16 text-center py-12 px-4 shadow-xl border border-[hsl(var(--border))]">
@@ -67,4 +59,3 @@ const Index = () => {
 };
 
 export default Index;
-
