@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -6,6 +5,9 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import Header from "@/components/Header";
 import Background from "@/components/Background";
 import { Users, FileText, BarChart } from "lucide-react";
+import UserManagement from "@/components/admin/UserManagement";
+import PostManagement from "@/components/admin/PostManagement";
+import AnalyticsSimple from "@/components/admin/AnalyticsSimple";
 
 export default function AdminDashboard() {
   return (
@@ -37,40 +39,22 @@ export default function AdminDashboard() {
                   </TabsTrigger>
                 </TabsList>
                 <TabsContent value="overview">
-                  <div className="flex flex-wrap gap-6 justify-center">
-                    <Card className="glass-panel min-w-[220px] text-center flex-1">
-                      <CardHeader>
-                        <CardTitle>Total Users</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="text-4xl font-bold text-accent drop-shadow-neon">--</div>
-                        <div className="text-xs text-muted-foreground mt-2">Loaded from Supabase</div>
-                      </CardContent>
-                    </Card>
-                    <Card className="glass-panel min-w-[220px] text-center flex-1">
-                      <CardHeader>
-                        <CardTitle>Total Posts</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="text-4xl font-bold text-primary drop-shadow-neon">--</div>
-                        <div className="text-xs text-muted-foreground mt-2">Loaded from Supabase</div>
-                      </CardContent>
-                    </Card>
-                  </div>
+                  <AnalyticsSimple />
                 </TabsContent>
                 <TabsContent value="users">
                   <div className="mt-4">
-                    <div className="glass-panel p-6">User Management Coming Soon...</div>
+                    <UserManagement />
                   </div>
                 </TabsContent>
                 <TabsContent value="posts">
                   <div className="mt-4">
-                    <div className="glass-panel p-6">Post Management Coming Soon...</div>
+                    <PostManagement />
                   </div>
                 </TabsContent>
                 <TabsContent value="analytics">
                   <div className="mt-4">
-                    <div className="glass-panel p-6">Analytics Coming Soon...</div>
+                    {/* You can add more advanced analytics here */}
+                    <AnalyticsSimple />
                   </div>
                 </TabsContent>
               </Tabs>
