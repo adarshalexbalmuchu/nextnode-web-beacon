@@ -1,58 +1,10 @@
 
-.loading-bg {
-  min-height: 100vh;
-  width: 100vw;
-  background: #0a0c13;
-  background-image:
-    linear-gradient(0deg, transparent 19px, #222a3d33 20px),
-    linear-gradient(90deg, transparent 19px, #222a3d33 20px);
-  background-size: 60px 60px;
-  opacity: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.65s cubic-bezier(.65,0,.12,1);
-  z-index: 1000;
-  position: fixed;
-  left: 0; top: 0;
-}
-
-.loading-effect-center {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 300px;
-  min-height: 220px;
-}
-
-.loading-dim-logo {
-  position: absolute;
-  width: 180px;
-  left: 50%; top: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0.27;
-  filter:
-    blur(0.5px)
-    drop-shadow(0 0 56px #37ffe799)
-    drop-shadow(0 0 70px #0cfbfe22);
-  z-index: 0;
-  pointer-events: none;
-  user-select: none;
-}
-
 .lightning-container {
   position: relative;
   width: 80px;
   height: 220px;
   margin: 0 auto;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* Render above logo blur */
 }
-
 .lightning-bolt {
   position: absolute;
   top: 0; left: 0;
@@ -60,7 +12,6 @@
   pointer-events: none;
   z-index: 2;
 }
-
 .bolt-main, .bolt-branch {
   fill: none;
   stroke: #fffbe6;
@@ -69,44 +20,19 @@
   stroke-linejoin: round;
   filter: drop-shadow(0 0 18px #fff) drop-shadow(0 0 36px #ffe066);
   opacity: 0;
-  transition: opacity 70ms;
 }
-
 .bolt-branch {
   stroke: #ffe066;
   stroke-width: 2.5;
   filter: drop-shadow(0 0 10px #ffe066);
   opacity: 0;
-  transition: opacity 60ms;
 }
-
 .flash-overlay {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: radial-gradient(ellipse 140% 70% at 50% 60%, #fffffff6 0%, #ffeea055 60%, #0a0c13 100%);
+  background: white;
   opacity: 0;
   z-index: 1;
   pointer-events: none;
-  transition: opacity 80ms;
-}
-
-
-/* Responsive sizing for logo and bolt for mobile */
-@media (max-width: 400px) {
-  .loading-effect-center {
-    min-width: 180px;
-    min-height: 120px;
-  }
-  .loading-dim-logo {
-    width: 100px;
-  }
-  .lightning-container {
-    width: 45px;
-    height: 110px;
-  }
-  .lightning-bolt {
-    width: 45px;
-    height: 110px;
-  }
 }
