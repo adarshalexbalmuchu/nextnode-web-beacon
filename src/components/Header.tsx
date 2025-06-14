@@ -1,6 +1,9 @@
+
 import React from "react";
-import { Search, User, LayoutDashboard } from "lucide-react";
+import { Search, User, LayoutDashboard, LogIn, LogOut } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
 
 const navLinks = [
   { name: "Home", href: "#" },
@@ -11,7 +14,8 @@ const navLinks = [
 ];
 
 const Header = () => {
-  const { role } = useAuth();
+  const { user, role } = useAuth();
+  const navigate = useNavigate();
 
   // Show Dashboard link if admin
   const allLinks = [...navLinks];
@@ -23,7 +27,12 @@ const Header = () => {
   let dashboardHref: string | null = null;
   if (role === "admin") dashboardHref = "/admin";
   else if (role === "author" || role === "user") dashboardHref = "/dashboard";
-  // If not logged in, keep it null
+
+  const handleSignIn = () => navigate("/auth");
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    navigate("/");
+  };
 
   return (
     <header className="w-full flex items-center justify-between px-2 md:px-6 py-5 bg-[#101622]/80 backdrop-blur-sm shadow-lg sticky top-0 z-30 border-b border-[#202A3D]">
@@ -66,6 +75,23 @@ const Header = () => {
         <button className="hover:text-cyan-400 focus:outline-none">
           <User size={22} />
         </button>
+        {!user ? (
+          <button
+            onClick={handleSignIn}
+            className="ml-2 flex items-center gap-1 px-3 py-1 bg-cyan-700 text-white rounded hover:bg-cyan-600 transition"
+            aria-label="Sign In"
+          >
+            <LogIn size={16} /> Sign In
+          </button>
+        ) : (
+          <button
+            onClick={handleSignOut}
+            className="ml-2 flex items-center gap-1 px-3 py-1 bg-gray-700 text-white rounded hover:bg-gray-600 transition"
+            aria-label="Sign Out"
+          >
+            <LogOut size={16} /> Sign Out
+          </button>
+        )}
       </div>
     </header>
   );

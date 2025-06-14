@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import LoadingPage from "@/components/LoadingPage";
 import AdminDashboard from "./pages/AdminDashboard";
+import AuthPage from "./pages/Auth";
 import React from "react";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,8 @@ const App = () => {
             <Route path="/" element={<Index />} />
             {/* Admin Dashboard */}
             <Route path="/admin" element={<AdminDashboard />} />
+            {/* Auth Page */}
+            <Route path="/auth" element={<AuthPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
