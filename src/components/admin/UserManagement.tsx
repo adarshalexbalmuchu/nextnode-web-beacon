@@ -3,76 +3,84 @@ import React from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 
-function getRoleColor(role: string) {
+type UserRole = "admin" | "author" | "user";
+
+interface ManagedUser {
+  id: string;
+  email: string;
+  role: UserRole;
+  assigned_at: string;
+}
+
+function roleBadgeColor(role: UserRole) {
   if (role === "admin") return "bg-cyan-600";
   if (role === "author") return "bg-purple-600";
   return "bg-gray-700";
 }
 
-// Utility function to fetch all users with their roles and emails from profiles table
-async function fetchUsers() {
-  // Join public.profiles and user_roles
-  let { data, error } = await supabase
+async function fetchUsers(): Promise<ManagedUser[]> {
+  // Get all users by joining user_roles to profiles (supabase-js expects the join as .select(..., profiles!fk(email, first_name, ...)))
+  const { data, error } = await supabase
     .from("user_roles")
-    .select("id, role, user_id, assigned_at, profiles:profiles!user_roles_user_id_fkey(email)")
+    .select("user_id: user_id, role, assigned_at, profiles: profiles!user_roles_user_id_fkey(email)")
     .order("assigned_at", { ascending: false });
 
   if (error) throw error;
-  // Filter for unique users (by user_id)
-  const uniqueUsers: { [id: string]: any } = {};
-  for (const row of data) {
-    if (!uniqueUsers[row.user_id]) {
-      uniqueUsers[row.user_id] = {
-        user_id: row.user_id,
-        role: row.role,
-        email: row.profiles?.email || "N/A",
-        assigned_at: row.assigned_at,
-        id: row.id,
-      };
+
+  // De-duplicate by user_id (most recent assignment per user)
+  const seen = new Set<string>();
+  const users: ManagedUser[] = [];
+  if (Array.isArray(data)) {
+    for (const row of data) {
+      if (!seen.has(row.user_id)) {
+        users.push({
+          id: row.user_id,
+          email: row.profiles?.email || "N/A",
+          role: row.role as UserRole,
+          assigned_at: row.assigned_at,
+        });
+        seen.add(row.user_id);
+      }
     }
   }
-  return Object.values(uniqueUsers);
+  return users;
 }
 
 function useUsers() {
-  return useQuery({
+  return useQuery<ManagedUser[], Error>({
     queryKey: ["admin-users"],
     queryFn: fetchUsers,
   });
 }
 
 function useSetRole() {
-  const queryClient = useQueryClient();
   const { toast } = useToast();
+  const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async ({ user_id, role }: { user_id: string; role: string }) => {
-      // Insert new user role, Supabase policy will only let admin do this
-      const { data, error } = await supabase
+    mutationFn: async ({ userId, newRole }: { userId: string; newRole: UserRole }) => {
+      // Insert new user_roles entry (do not update, always append, as per the schema)
+      const { error } = await supabase
         .from("user_roles")
-        .insert([{ user_id, role }]);
+        .insert([{ user_id: userId, role: newRole as UserRole }]);
       if (error) throw error;
-      return data;
+      return true;
     },
     onSuccess: () => {
-      toast({ description: "Role updated!", variant: "default" });
+      toast({ description: "Role updated successfully", variant: "default" });
       queryClient.invalidateQueries({ queryKey: ["admin-users"] });
     },
     onError: (error: any) => {
-      toast({ description: error.message || "Role update failed", variant: "destructive" });
+      toast({ description: error.message || "Failed to update role", variant: "destructive" });
     },
   });
 }
 
-const ROLES = [
-  { label: "Admin", value: "admin" },
-  { label: "Author", value: "author" },
-  { label: "User", value: "user" },
-];
+const ROLES: UserRole[] = ["admin", "author", "user"];
 
 const UserManagement = () => {
   const { data: users, isLoading } = useUsers();
@@ -82,45 +90,50 @@ const UserManagement = () => {
     <div>
       <h3 className="text-xl font-semibold mb-4">Users</h3>
       <div className="overflow-x-auto">
-        <Table className="glass-panel min-w-[500px]">
+        <Table className="glass-panel min-w-[600px]">
           <TableHeader>
             <TableRow>
               <TableHead>Email</TableHead>
               <TableHead>Role</TableHead>
-              <TableHead>Action</TableHead>
+              <TableHead>Change Role</TableHead>
+              <TableHead>Joined</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {isLoading ? (
               <TableRow>
-                <TableCell colSpan={3}>Loading users...</TableCell>
+                <TableCell colSpan={4}>Loading users...</TableCell>
               </TableRow>
             ) : (Array.isArray(users) && users.length > 0 ? users.map(user => (
-              <TableRow key={user.user_id}>
+              <TableRow key={user.id}>
                 <TableCell>{user.email}</TableCell>
                 <TableCell>
-                  <Badge className={getRoleColor(user.role)}>{user.role}</Badge>
+                  <Badge className={roleBadgeColor(user.role)}>{user.role}</Badge>
                 </TableCell>
                 <TableCell>
-                  <div className="flex gap-2">
-                    {ROLES.map(role =>
-                      role.value !== user.role && (
-                        <Button
-                          key={role.value}
-                          size="sm"
-                          variant="outline"
-                          onClick={() => setRole.mutate({ user_id: user.user_id, role: role.value })}
-                        >
-                          Make {role.label}
-                        </Button>
-                      )
-                    )}
-                  </div>
+                  <Select
+                    value={user.role}
+                    onValueChange={val => setRole.mutate({ userId: user.id, newRole: val as UserRole })}
+                  >
+                    <SelectTrigger className="w-[120px]">
+                      <SelectValue placeholder="Role" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {ROLES.map(role => (
+                        <SelectItem key={role} value={role} disabled={user.role === role}>
+                          {role.charAt(0).toUpperCase() + role.slice(1)}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </TableCell>
+                <TableCell>
+                  {user.assigned_at ? new Date(user.assigned_at).toLocaleDateString() : "--"}
                 </TableCell>
               </TableRow>
             )) : (
               <TableRow>
-                <TableCell colSpan={3}>No users found</TableCell>
+                <TableCell colSpan={4}>No users found</TableCell>
               </TableRow>
             ))}
           </TableBody>
