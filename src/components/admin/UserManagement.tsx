@@ -43,12 +43,13 @@ async function fetchUsers(): Promise<ManagedUser[]> {
   for (const row of data) {
     // Skip rows where there is no profiles join (could be a query error object)
     if (!row.profiles || typeof row.profiles !== "object") continue;
+    const profiles = row.profiles as { email?: string | null; first_name?: string | null; last_name?: string | null }; // Ensure TS knows it's not null
     if (!seen.has(row.user_id)) {
       users.push({
         id: row.user_id,
-        email: row.profiles.email || "N/A",
-        first_name: row.profiles.first_name ?? "",
-        last_name: row.profiles.last_name ?? "",
+        email: profiles.email || "N/A",
+        first_name: profiles.first_name ?? "",
+        last_name: profiles.last_name ?? "",
         role: row.role as UserRole,
         assigned_at: row.assigned_at,
       });
