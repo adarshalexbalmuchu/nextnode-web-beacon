@@ -36,16 +36,19 @@ async function fetchUsers(): Promise<ManagedUser[]> {
   // Guard for empty data or error
   if (!Array.isArray(data)) return [];
 
-  // De-duplicate by user_id, only use the latest role assignment
+  // Filter and de-duplicate by user_id, only use the latest role assignment
   const seen = new Set<string>();
   const users: ManagedUser[] = [];
+
   for (const row of data) {
+    // Skip rows where there is no profiles join (could be a query error object)
+    if (!row.profiles || typeof row.profiles !== "object") continue;
     if (!seen.has(row.user_id)) {
       users.push({
         id: row.user_id,
-        email: row.profiles?.email || "N/A",
-        first_name: row.profiles?.first_name ?? "",
-        last_name: row.profiles?.last_name ?? "",
+        email: row.profiles.email || "N/A",
+        first_name: row.profiles.first_name ?? "",
+        last_name: row.profiles.last_name ?? "",
         role: row.role as UserRole,
         assigned_at: row.assigned_at,
       });
