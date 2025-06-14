@@ -10,12 +10,7 @@ const Index = () => {
       <Header />
       <main className="flex-1 flex flex-col items-center justify-center px-4 z-10 relative">
         <section className="glass-panel bg-gradient-futuristic w-full max-w-3xl mx-auto flex flex-col items-center mt-20 mb-16 text-center py-12 px-4 shadow-xl border border-[hsl(var(--border))]">
-          {/* Top pill */}
-          <div className="mb-6">
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#122832]/80 text-cyan-400 text-base font-medium shadow border border-cyan-900/40">
-              • AI Tools, Careers & Practical Guides
-            </span>
-          </div>
+          {/* Removed Top pill / colored overlay */}
           {/* Headline */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 text-white leading-tight text-glow">
             Your{" "}
