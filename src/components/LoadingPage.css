@@ -2,7 +2,7 @@
 /* Dramatic Realistic Lightning Effect */
 .lightning-container {
   position: relative;
-  width: 120px;
+  width: 150px;
   height: 100vh;
   margin: 0 auto;
   z-index: 5;
@@ -12,52 +12,87 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 120px;
+  width: 150px;
   height: 100vh;
   pointer-events: none;
   z-index: 2;
 }
 
-.bolt-main, .bolt-branch {
+.bolt-main {
   fill: none;
-  stroke: #00d4aa;
-  stroke-width: 8;
+  stroke: #ffffff;
+  stroke-width: 12;
   stroke-linecap: round;
   stroke-linejoin: round;
-  filter: drop-shadow(0 0 25px #00d4aa) drop-shadow(0 0 50px #00bfa5) drop-shadow(0 0 75px #00acc1);
+  filter: 
+    drop-shadow(0 0 8px #ffffff) 
+    drop-shadow(0 0 16px #00ffff) 
+    drop-shadow(0 0 24px #0099ff)
+    drop-shadow(0 0 32px #0066ff);
   opacity: 0;
-  transition: opacity 0.05s ease-out;
+  transition: opacity 0.02s ease-out;
 }
 
 .bolt-branch {
-  stroke: #00bfa5;
-  stroke-width: 4;
-  filter: drop-shadow(0 0 15px #00bfa5) drop-shadow(0 0 30px #00acc1);
+  fill: none;
+  stroke: #00ccff;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: 
+    drop-shadow(0 0 6px #00ccff) 
+    drop-shadow(0 0 12px #0099ff)
+    drop-shadow(0 0 18px #0066ff);
   opacity: 0;
+  transition: opacity 0.02s ease-out;
+}
+
+.bolt-secondary {
+  fill: none;
+  stroke: #88ddff;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: 
+    drop-shadow(0 0 4px #88ddff) 
+    drop-shadow(0 0 8px #00aaff);
+  opacity: 0;
+  transition: opacity 0.02s ease-out;
 }
 
 .flash-overlay {
   position: absolute;
   top: 0;
-  left: -50vw;
-  width: 200vw;
+  left: -100vw;
+  width: 300vw;
   height: 100vh;
-  background: radial-gradient(ellipse at center, rgba(0, 212, 170, 0.4) 0%, rgba(0, 191, 165, 0.3) 30%, rgba(0, 172, 193, 0.2) 50%, transparent 70%);
+  background: radial-gradient(
+    ellipse at center, 
+    rgba(255, 255, 255, 0.9) 0%, 
+    rgba(0, 255, 255, 0.7) 15%, 
+    rgba(0, 153, 255, 0.5) 30%, 
+    rgba(0, 102, 255, 0.3) 45%,
+    transparent 70%
+  );
   opacity: 0;
   z-index: 1;
   pointer-events: none;
-  transition: opacity 0.05s ease-out;
+  transition: opacity 0.02s ease-out;
 }
 
 /* Enhanced Logo Glow Effects */
 .logo-electric-glow {
   filter: 
-    drop-shadow(0 0 20px #00d4aa) 
-    drop-shadow(0 0 40px #00bfa5) 
-    drop-shadow(0 0 60px #00acc1) 
-    drop-shadow(0 0 80px #0097a7)
-    drop-shadow(0 0 100px #00838f);
-  animation: electric-pulse 2s ease-in-out infinite;
+    drop-shadow(0 0 30px #ffffff) 
+    drop-shadow(0 0 60px #00ffff) 
+    drop-shadow(0 0 90px #0099ff) 
+    drop-shadow(0 0 120px #0066ff)
+    drop-shadow(0 0 150px #0033ff)
+    drop-shadow(0 0 200px #001aff);
+  animation: intense-electric-pulse 1.5s ease-in-out infinite;
+  transform: scale(1.15);
+  brightness: 2;
+  contrast: 1.3;
 }
 
 .logo-pulse-glow {
@@ -67,47 +102,73 @@
   transform: translate(-50%, -50%);
   background: radial-gradient(
     circle,
-    rgba(0, 212, 170, 0.5) 0%,
-    rgba(0, 191, 165, 0.4) 25%,
-    rgba(0, 172, 193, 0.3) 50%,
-    rgba(0, 151, 167, 0.2) 75%,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(0, 255, 255, 0.6) 20%,
+    rgba(0, 153, 255, 0.4) 40%,
+    rgba(0, 102, 255, 0.3) 60%,
+    rgba(0, 51, 255, 0.2) 80%,
     transparent 100%
   );
-  animation: pulse-glow 2s ease-in-out infinite;
+  animation: intense-pulse-glow 1.5s ease-in-out infinite;
   pointer-events: none;
+  border-radius: 50%;
 }
 
-/* Lightning strike animation */
+/* Lightning strike animation with realistic flickering */
 @keyframes lightning-strike {
   0% { 
     opacity: 0; 
-    transform: scaleY(0) translateY(-50%);
+    transform: scaleY(0) translateY(-100%);
   }
-  5% { 
-    opacity: 0.3; 
-    transform: scaleY(0.1) translateY(-40%);
+  2% { 
+    opacity: 0.4; 
+    transform: scaleY(0.1) translateY(-80%);
+  }
+  4% { 
+    opacity: 1; 
+    transform: scaleY(0.3) translateY(-60%);
+  }
+  6% { 
+    opacity: 0.8; 
+    transform: scaleY(0.5) translateY(-40%);
+  }
+  8% { 
+    opacity: 1; 
+    transform: scaleY(0.7) translateY(-20%);
   }
   10% { 
     opacity: 1; 
-    transform: scaleY(0.4) translateY(-20%);
-  }
-  15% { 
-    opacity: 1; 
     transform: scaleY(1) translateY(0);
   }
-  18% {
-    opacity: 0.9;
+  12% {
+    opacity: 0.3;
     transform: scaleY(1) translateY(0);
   }
-  20% {
+  14% {
     opacity: 1;
     transform: scaleY(1) translateY(0);
   }
-  22% {
-    opacity: 0.8;
+  16% {
+    opacity: 0.6;
     transform: scaleY(1) translateY(0);
   }
-  25% {
+  18% {
+    opacity: 1;
+    transform: scaleY(1) translateY(0);
+  }
+  20% {
+    opacity: 0.4;
+    transform: scaleY(1) translateY(0);
+  }
+  22% {
+    opacity: 1;
+    transform: scaleY(1) translateY(0);
+  }
+  24% {
+    opacity: 0.7;
+    transform: scaleY(1) translateY(0);
+  }
+  26% {
     opacity: 1;
     transform: scaleY(1) translateY(0);
   }
@@ -121,41 +182,93 @@
   }
 }
 
-/* Electric pulse animation for logo */
-@keyframes electric-pulse {
+/* Intense electric pulse animation for logo */
+@keyframes intense-electric-pulse {
   0%, 100% { 
     filter: 
-      drop-shadow(0 0 20px #00d4aa) 
-      drop-shadow(0 0 40px #00bfa5) 
-      drop-shadow(0 0 60px #00acc1);
+      drop-shadow(0 0 30px #ffffff) 
+      drop-shadow(0 0 60px #00ffff) 
+      drop-shadow(0 0 90px #0099ff);
+    transform: scale(1.15);
+    brightness: 2;
+  }
+  25% { 
+    filter: 
+      drop-shadow(0 0 50px #ffffff) 
+      drop-shadow(0 0 100px #00ffff) 
+      drop-shadow(0 0 150px #0099ff) 
+      drop-shadow(0 0 200px #0066ff)
+      drop-shadow(0 0 250px #0033ff);
+    transform: scale(1.25);
+    brightness: 2.5;
   }
   50% { 
     filter: 
-      drop-shadow(0 0 30px #00d4aa) 
-      drop-shadow(0 0 60px #00bfa5) 
-      drop-shadow(0 0 90px #00acc1) 
-      drop-shadow(0 0 120px #0097a7)
-      drop-shadow(0 0 150px #00838f);
+      drop-shadow(0 0 60px #ffffff) 
+      drop-shadow(0 0 120px #00ffff) 
+      drop-shadow(0 0 180px #0099ff) 
+      drop-shadow(0 0 240px #0066ff)
+      drop-shadow(0 0 300px #0033ff)
+      drop-shadow(0 0 360px #001aff);
+    transform: scale(1.3);
+    brightness: 3;
+  }
+  75% { 
+    filter: 
+      drop-shadow(0 0 45px #ffffff) 
+      drop-shadow(0 0 90px #00ffff) 
+      drop-shadow(0 0 135px #0099ff) 
+      drop-shadow(0 0 180px #0066ff)
+      drop-shadow(0 0 225px #0033ff);
+    transform: scale(1.2);
+    brightness: 2.3;
   }
 }
 
-/* Pulse glow animation for background glow */
-@keyframes pulse-glow {
+/* Intense pulse glow animation for background glow */
+@keyframes intense-pulse-glow {
   0%, 100% {
-    opacity: 0.6;
-    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  25% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.5);
   }
   50% {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1.2);
+    transform: translate(-50%, -50%) scale(1.8);
+  }
+  75% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(1.6);
   }
 }
 
 .animate-lightning-strike {
-  animation: lightning-strike 1s ease-out forwards;
+  animation: lightning-strike 1.2s ease-out forwards;
   transform-origin: top center;
 }
 
 .animate-electric-pulse {
-  animation: electric-pulse 2s ease-in-out infinite;
+  animation: intense-electric-pulse 1.5s ease-in-out infinite;
+}
+
+/* Additional screen flash effect */
+.screen-flash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(0, 255, 255, 0.2) 30%,
+    transparent 70%
+  );
+  opacity: 0;
+  z-index: 15;
+  pointer-events: none;
+  transition: opacity 0.03s ease-out;
 }
