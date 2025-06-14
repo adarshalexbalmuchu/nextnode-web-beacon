@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
+import './LoadingPage.css';
 
 const LoadingPage: React.FC = () => {
   const [showLightning, setShowLightning] = useState(false);
@@ -70,11 +71,11 @@ const LoadingPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-background via-background/95 to-background flex items-center justify-center overflow-hidden">
+    <div className="fixed inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center overflow-hidden">
       
       {/* Dramatic Realistic Lightning Strike */}
       {showLightning && (
-        <div className="absolute top-0 left-1/2 transform -translate-x-1/2">
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 z-20">
           <div className="lightning-container">
             <svg className="lightning-bolt" width="120" height="100vh" viewBox="0 0 120 800">
               {/* Main jagged lightning bolt */}
@@ -106,17 +107,20 @@ const LoadingPage: React.FC = () => {
       )}
 
       {/* Logo with Enhanced Glow Effect */}
-      <div className="relative z-10">
+      <div className="relative z-10 flex items-center justify-center">
         <div className="relative">
           <img
-            src="/NextNode-Logo.svg"
+            src="/lovable-uploads/140e87cf-827f-4a94-9651-018811edf627.png"
             alt="NextNode"
             className={`w-80 h-80 sm:w-96 sm:h-96 md:w-[28rem] md:h-[28rem] lg:w-[32rem] lg:h-[32rem] object-contain transition-all duration-1000 ${
               logoGlow 
-                ? 'brightness-200 drop-shadow-[0_0_50px_hsl(var(--primary))] drop-shadow-[0_0_100px_rgba(0,255,255,0.6)] scale-110' 
+                ? 'logo-electric-glow scale-110 brightness-150' 
                 : 'brightness-100 scale-100'
             }`}
           />
+          {logoGlow && (
+            <div className="absolute inset-0 logo-pulse-glow w-80 h-80 sm:w-96 sm:h-96 md:w-[28rem] md:h-[28rem] lg:w-[32rem] lg:h-[32rem] rounded-full"></div>
+          )}
         </div>
       </div>
     </div>
