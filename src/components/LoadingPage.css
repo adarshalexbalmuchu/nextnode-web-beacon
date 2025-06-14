@@ -17,70 +17,96 @@
   left: 0; top: 0;
 }
 
-.loading-logo-container {
+.loading-effect-center {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 300px;
+  min-height: 220px;
 }
 
-.loading-logo-glow {
-  width: clamp(210px, 34vw, 390px);
-  filter:
-    drop-shadow(0 0 32px #37ffe799)
-    drop-shadow(0 0 18px #30befa99)
-    drop-shadow(0 0 55px #0cfbfe77)
-    ;
-  animation: glowPulse 1.75s cubic-bezier(.36,0,.66,.98) infinite alternate;
-}
-
-@keyframes glowPulse {
-  0% {
-    filter:
-      drop-shadow(0 0 28px #37ffe77b)
-      drop-shadow(0 0 18px #30befa88)
-      drop-shadow(0 0 40px #0cfbfe55)
-      ;
-    opacity: 1;
-    transform: scale(1);
-  }
-  100% {
-    filter:
-      drop-shadow(0 0 54px #3cf3f6c8)
-      drop-shadow(0 0 32px #30befacc)
-      drop-shadow(0 0 70px #0cfbfecc)
-      ;
-    opacity: 0.94;
-    transform: scale(1.04);
-  }
-}
-
-.bolt-glow {
+.loading-dim-logo {
   position: absolute;
-  top: 18%;
-  left: 60%;
-  transform: translate(-50%, -50%) scale(1.18) rotate(10deg);
+  width: 180px;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.27;
+  filter:
+    blur(0.5px)
+    drop-shadow(0 0 56px #37ffe799)
+    drop-shadow(0 0 70px #0cfbfe22);
+  z-index: 0;
   pointer-events: none;
-  opacity: 0.93;
-  filter: blur(0.5px);
-  animation: boltFlash 1.1s cubic-bezier(.65,0,.34,1) infinite alternate;
+  user-select: none;
 }
 
-@keyframes boltFlash {
-  0% {
-    opacity: 0.74;
-    filter: blur(1.3px) brightness(1.2) drop-shadow(0px 0px 22px #3cf3f6e9);
+.lightning-container {
+  position: relative;
+  width: 80px;
+  height: 220px;
+  margin: 0 auto;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Render above logo blur */
+}
+
+.lightning-bolt {
+  position: absolute;
+  top: 0; left: 0;
+  width: 80px; height: 220px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.bolt-main, .bolt-branch {
+  fill: none;
+  stroke: #fffbe6;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 18px #fff) drop-shadow(0 0 36px #ffe066);
+  opacity: 0;
+  transition: opacity 70ms;
+}
+
+.bolt-branch {
+  stroke: #ffe066;
+  stroke-width: 2.5;
+  filter: drop-shadow(0 0 10px #ffe066);
+  opacity: 0;
+  transition: opacity 60ms;
+}
+
+.flash-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: radial-gradient(ellipse 140% 70% at 50% 60%, #fffffff6 0%, #ffeea055 60%, #0a0c13 100%);
+  opacity: 0;
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity 80ms;
+}
+
+
+/* Responsive sizing for logo and bolt for mobile */
+@media (max-width: 400px) {
+  .loading-effect-center {
+    min-width: 180px;
+    min-height: 120px;
   }
-  26% {
-    opacity: 1;
-    filter: blur(1.7px) brightness(2.2) drop-shadow(0 0 40px #ffffffdb);
+  .loading-dim-logo {
+    width: 100px;
   }
-  48% {
-    opacity: 0.70;
-    filter: blur(1.5px) brightness(1.5) drop-shadow(0 0 20px #00fff9ad);
+  .lightning-container {
+    width: 45px;
+    height: 110px;
   }
-  100% {
-    opacity: 0.42;
-    filter: blur(1.3px) brightness(0.7) drop-shadow(0 0 0px #00fff94a);
+  .lightning-bolt {
+    width: 45px;
+    height: 110px;
   }
 }
