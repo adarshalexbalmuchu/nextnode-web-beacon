@@ -8,9 +8,7 @@ const Index = () => {
       {/* Futuristic animated background layer */}
       <Background />
       <Header />
-      <main className="flex-1 flex flex-col items-center justify-center px-4 z-10 relative">
-        {/* Removed glass-panel box.
-            Place only the text/headline/buttons directly over the background */}
+      <main className="flex-1 flex flex-col items-center justify-center px-4 z-10 relative text-center">
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 text-white leading-tight text-glow animate-fade-in">
           Your{" "}
           <span className="bg-gradient-to-r from-cyan-400 via-cyan-300 to-cyan-100 text-transparent bg-clip-text drop-shadow-glow">
@@ -20,10 +18,10 @@ const Index = () => {
           Career Hub
         </h1>
         {/* Subtitle */}
-        <p className="text-lg md:text-xl text-slate-300 mb-1 max-w-2xl mx-auto animate-fade-in">
+        <p className="text-lg md:text-xl text-slate-300 mb-1 max-w-2xl mx-auto animate-fade-in text-center">
           Master AI tools, accelerate your career, and gain practical skills for students and working professionals.
         </p>
-        <p className="text-base text-cyan-100/80 mb-8 animate-fade-in">
+        <p className="text-base text-cyan-100/80 mb-8 animate-fade-in text-center">
           Real tools. Real results. Real growth.
         </p>
         {/* CTA Buttons */}
@@ -52,4 +50,3 @@ const Index = () => {
 };
 
 export default Index;
-
