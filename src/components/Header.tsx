@@ -1,6 +1,5 @@
-
 import React from "react";
-import { Search, User } from "lucide-react";
+import { Search, User, LayoutDashboard } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 
 const navLinks = [
@@ -19,6 +18,12 @@ const Header = () => {
   if (role === "admin") {
     allLinks.splice(1, 0, { name: "Dashboard", href: "/admin" });
   }
+
+  // Role-based dashboard (for right-side icon)
+  let dashboardHref: string | null = null;
+  if (role === "admin") dashboardHref = "/admin";
+  else if (role === "author" || role === "user") dashboardHref = "/dashboard";
+  // If not logged in, keep it null
 
   return (
     <header className="w-full flex items-center justify-between px-2 md:px-6 py-5 bg-[#101622]/80 backdrop-blur-sm shadow-lg sticky top-0 z-30 border-b border-[#202A3D]">
@@ -44,6 +49,17 @@ const Header = () => {
       </nav>
       {/* Icons */}
       <div className="flex items-center gap-5 text-white">
+        {/* Dashboard button for admin/user/author */}
+        {dashboardHref && (
+          <a
+            href={dashboardHref}
+            className="hover:text-cyan-400 focus:outline-none transition-colors"
+            title="Dashboard"
+            aria-label="Dashboard"
+          >
+            <LayoutDashboard size={22} />
+          </a>
+        )}
         <button className="hover:text-cyan-400 focus:outline-none">
           <Search size={22} />
         </button>
