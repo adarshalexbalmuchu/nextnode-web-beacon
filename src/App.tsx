@@ -15,7 +15,7 @@ const App = () => {
 
   React.useEffect(() => {
     // Simulate loading time (e.g., fetch data/resources)
-    const timer = setTimeout(() => setLoading(false), 1500); // 1.5s
+    const timer = setTimeout(() => setLoading(false), 2200); // 2.2s, to better show the animation
     return () => clearTimeout(timer);
   }, []);
 
