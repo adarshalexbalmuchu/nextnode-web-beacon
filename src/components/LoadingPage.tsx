@@ -71,7 +71,7 @@ const LoadingPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center overflow-hidden">
+    <div className="fixed inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 flex items-center justify-center overflow-hidden">
       
       {/* Dramatic Realistic Lightning Strike */}
       {showLightning && (
@@ -107,10 +107,10 @@ const LoadingPage: React.FC = () => {
       )}
 
       {/* Logo with Enhanced Glow Effect */}
-      <div className="relative z-10 flex items-center justify-center">
+      <div className="relative z-10">
         <div className="relative">
           <img
-            src="/lovable-uploads/140e87cf-827f-4a94-9651-018811edf627.png"
+            src="/lovable-uploads/55b69b94-d123-47b8-ad9e-8f72a7b53471.png"
             alt="NextNode"
             className={`w-80 h-80 sm:w-96 sm:h-96 md:w-[28rem] md:h-[28rem] lg:w-[32rem] lg:h-[32rem] object-contain transition-all duration-1000 ${
               logoGlow 
