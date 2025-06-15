@@ -1,3 +1,4 @@
+
 import React, { Suspense, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, OrbitControls, useGLTF, useAnimations } from "@react-three/drei";
@@ -5,7 +6,11 @@ import { useNavigate } from "react-router-dom";
 
 const MODEL_PATH = "/Clicktoread.glb";
 
-function RotatingPromptModel() {
+type ClickablePromptModelProps = {
+  scale?: number;
+};
+
+function RotatingPromptModel({ scale = 1 }: { scale?: number }) {
   const group = useRef<any>();
   const gltf = useGLTF(MODEL_PATH, true);
   const { actions } = useAnimations(gltf.animations, group);
@@ -47,13 +52,13 @@ function RotatingPromptModel() {
 
   return (
     <group ref={group}>
-      {/* Model scale set to 1 (100%) */}
-      <primitive object={gltf.scene} dispose={null} scale={1} />
+      {/* Model scale set by prop */}
+      <primitive object={gltf.scene} dispose={null} scale={scale} />
     </group>
   );
 }
 
-const ClickablePromptModel: React.FC = () => {
+const ClickablePromptModel: React.FC<ClickablePromptModelProps> = ({ scale = 1 }) => {
   const navigate = useNavigate();
   const handleClick = () => navigate("/ai-tool-page");
 
@@ -96,7 +101,7 @@ const ClickablePromptModel: React.FC = () => {
             </Html>
           }
         >
-          <RotatingPromptModel />
+          <RotatingPromptModel scale={scale} />
         </Suspense>
         <OrbitControls enablePan={false} enableZoom={false} enableRotate={false} />
       </Canvas>
@@ -105,3 +110,4 @@ const ClickablePromptModel: React.FC = () => {
 };
 
 export default ClickablePromptModel;
+

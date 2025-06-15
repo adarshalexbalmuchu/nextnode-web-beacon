@@ -1,8 +1,8 @@
-
 import React from "react";
 import Header from "@/components/Header";
 import Background from "@/components/Background";
 import AIToolModel from "@/components/AIToolModel";
+import ClickablePromptModel from "@/components/ClickablePromptModel";
 
 const Index = () => {
   return (
@@ -18,11 +18,11 @@ const Index = () => {
         <Background />
         <div className="flex flex-1 flex-col items-center justify-start relative z-10 min-h-0">
           <Header />
-          {/* Remove: Clicktoread model above AI Tool model */}
+          {/* Add vertical stack: Clicktoread model above AI Tool model */}
           <div className="flex flex-col items-center w-full gap-6" style={{ marginTop: "32px", marginBottom: "40px" }}>
-            {/* <div className="w-full max-w-2xl relative flex items-center justify-center">
-              <ClickablePromptModel />
-            </div> */}
+            <div className="w-full max-w-2xl relative flex items-center justify-center">
+              <ClickablePromptModel scale={0.1} />
+            </div>
             <div className="w-full max-w-2xl relative flex items-center justify-center mt-6">
               <AIToolModel />
             </div>
