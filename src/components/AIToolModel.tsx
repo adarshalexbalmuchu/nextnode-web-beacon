@@ -1,3 +1,4 @@
+
 import React, { Suspense, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, OrbitControls, useGLTF, useAnimations } from "@react-three/drei";
@@ -57,12 +58,14 @@ const AIToolModel: React.FC = () => {
   const navigate = useNavigate();
   const handleClick = () => navigate("/ai-blog-loading");
 
-  // The container is larger, but still leaves room for scroll down button
+  // Use an aspect-ratio box to ensure the model is always visible and never cropped.
   return (
     <div
       className="
-        flex flex-1 items-center justify-center w-full
+        w-full h-full max-w-none flex items-center justify-center
         cursor-pointer select-none bg-transparent
+        aspect-[1/1]
+        sm:aspect-[4/3] md:aspect-[16/9]
       "
       onClick={handleClick}
       title="Click to visit AI Blog"
@@ -71,9 +74,8 @@ const AIToolModel: React.FC = () => {
       aria-label="Go to AI Blog"
       onKeyDown={e => (e.key === "Enter" || e.key === " ") && handleClick()}
       style={{
-        height: "320px", // Bigger, but not too big
-        maxWidth: "400px",
-        minHeight: 0,
+        // Let the parent control the space; this container simply preserves aspect ratio
+        // Remove cropping/margin/height/width restrictions
       }}
     >
       <Canvas
@@ -109,3 +111,4 @@ const AIToolModel: React.FC = () => {
 };
 
 export default AIToolModel;
+
