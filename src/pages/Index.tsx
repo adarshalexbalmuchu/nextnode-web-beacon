@@ -7,30 +7,42 @@ import AIToolModel from "@/components/AIToolModel";
 const Index = () => {
   return (
     <div
-      className="h-screen w-full overflow-y-scroll snap-y snap-mandatory"
+      className="fixed inset-0 w-full h-full min-h-screen max-h-screen overflow-y-auto snap-y snap-mandatory"
       style={{
         scrollBehavior: "smooth",
         WebkitOverflowScrolling: "touch",
       }}
     >
       {/* Section 1: Home (existing) */}
-      <section className="relative w-full h-screen snap-start flex flex-col">
+      <section className="relative w-full h-screen min-h-screen snap-start flex flex-col">
         <Background />
-        {/* Centered AI Tool animation and Header */}
         <AIToolModel />
         <Header />
+        {/* Scroll Down Indicator */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 pointer-events-none flex flex-col items-center">
+          <span className="text-cyan-400 text-xs mb-1 tracking-wider animate-fade-in">
+            SCROLL DOWN
+          </span>
+          <svg
+            className="animate-bounce"
+            width="26"
+            height="26"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 16l-6-6h12l-6 6z" fill="#67e8f9" />
+          </svg>
+        </div>
       </section>
       {/* Section 2: New Full-Screen Page/Section */}
-      <section className="relative w-full h-screen snap-start flex flex-col items-center justify-center bg-gradient-futuristic">
-        {/* Placeholder content for new section, replace as needed */}
+      <section className="relative w-full h-screen min-h-screen snap-start flex flex-col items-center justify-center bg-gradient-futuristic">
         <div className="glass-panel p-8 rounded-xl flex flex-col items-center animate-fade-in shadow-2xl">
           <h2 className="text-3xl md:text-4xl font-bold text-cyan-300 mb-4 text-glow">
             Welcome to the Next Section!
           </h2>
           <p className="max-w-md text-slate-200 text-lg md:text-xl mb-2 text-center">
             This is a new full-page section.<br />
-            You can customize this area with any content,
-            features, or calls to action you like.
+            You can customize this area with any content, features, or calls to action you like.
           </p>
         </div>
       </section>
@@ -39,4 +51,3 @@ const Index = () => {
 };
 
 export default Index;
-
