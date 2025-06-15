@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import Background from "@/components/Background";
 
 export default function AuthPage() {
   const { user, role, loading } = useAuth();
@@ -56,8 +57,9 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-futuristic">
-      <Card className="glass-panel max-w-sm w-full">
+    <div className="min-h-screen w-full flex items-center justify-center relative overflow-hidden">
+      <Background />
+      <Card className="glass-panel max-w-sm w-full relative z-10">
         <CardHeader>
           <CardTitle className="mb-2">{variant === "login" ? "Log In" : "Sign Up"}</CardTitle>
         </CardHeader>

@@ -6,7 +6,11 @@ import { useNavigate } from "react-router-dom";
 
 const MODEL_PATH = "/Clicktoread.glb";
 
-function RotatingPromptModel() {
+type ClickablePromptModelProps = {
+  scale?: number;
+};
+
+function RotatingPromptModel({ scale = 1 }: { scale?: number }) {
   const group = useRef<any>();
   const gltf = useGLTF(MODEL_PATH, true);
   const { actions } = useAnimations(gltf.animations, group);
@@ -48,13 +52,13 @@ function RotatingPromptModel() {
 
   return (
     <group ref={group}>
-      {/* Model scale set to 1 (100%) */}
-      <primitive object={gltf.scene} dispose={null} scale={1} />
+      {/* Model scale set by prop */}
+      <primitive object={gltf.scene} dispose={null} scale={scale} />
     </group>
   );
 }
 
-const ClickablePromptModel: React.FC = () => {
+const ClickablePromptModel: React.FC<ClickablePromptModelProps> = ({ scale = 1 }) => {
   const navigate = useNavigate();
   const handleClick = () => navigate("/ai-tool-page");
 
@@ -91,20 +95,16 @@ const ClickablePromptModel: React.FC = () => {
               <div style={{ textAlign: "center", fontSize: "16px" }}>
                 <div>Loading Clicktoread 3D Model...</div>
                 <div style={{ fontSize: "12px" }}>
-                  If stuck, <a href={MODEL_PATH} style={{ textDecoration: "underline", color: "#ffdb3a" }} target="_blank" rel="noopener noreferrer">test the GLB link</a>
+                  If stuck, <a href={"/Clicktoread.glb"} style={{ textDecoration: "underline", color: "#ffdb3a" }} target="_blank" rel="noopener noreferrer">test the GLB link</a>
                 </div>
               </div>
             </Html>
           }
         >
-          <RotatingPromptModel />
+          <RotatingPromptModel scale={scale} />
         </Suspense>
         <OrbitControls enablePan={false} enableZoom={false} enableRotate={false} />
       </Canvas>
-      {/* "Clicktoread" label below the model */}
-      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/60 text-yellow-400 rounded px-3 py-1 mt-2 text-xs font-bold pointer-events-none select-none backdrop-blur-sm shadow">
-        Clicktoread
-      </div>
     </div>
   );
 };

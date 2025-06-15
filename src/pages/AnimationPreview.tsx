@@ -1,17 +1,15 @@
 
 import React from "react";
-import Header from "@/components/Header";
+import CasualWalkModel from "@/components/CasualWalkModel";
 import Background from "@/components/Background";
-import AnimationViewer from "@/components/AnimationViewer";
 
 const AnimationPreview = () => {
   return (
-    <div className="min-h-screen w-full flex flex-col relative bg-transparent overflow-x-hidden">
+    <div className="relative w-full h-screen min-h-screen flex items-center justify-center overflow-hidden">
       <Background />
-      <Header />
-      <main className="flex-1 container mx-auto px-4 py-8 relative z-10">
-        <AnimationViewer />
-      </main>
+      <div className="relative z-10 flex items-center justify-center w-full h-full">
+        <CasualWalkModel />
+      </div>
     </div>
   );
 };
