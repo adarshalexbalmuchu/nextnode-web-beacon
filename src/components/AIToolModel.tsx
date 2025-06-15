@@ -1,3 +1,4 @@
+
 import React, { Suspense, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, OrbitControls, useGLTF, useAnimations } from "@react-three/drei";
@@ -67,7 +68,8 @@ function AIBlogText({ onClick }: { onClick: () => void }) {
 
 const AIToolModel: React.FC = () => {
   const navigate = useNavigate();
-  const handleClick = () => navigate("/ai-blog");
+  // Change here: go to /ai-blog-loading instead of /ai-blog
+  const handleClick = () => navigate("/ai-blog-loading");
 
   return (
     <div
@@ -123,3 +125,4 @@ const AIToolModel: React.FC = () => {
 };
 
 export default AIToolModel;
+
