@@ -4,7 +4,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, OrbitControls, useGLTF, useAnimations } from "@react-three/drei";
 import { useNavigate } from "react-router-dom";
 
-const MODEL_PATH = "/Clickable_Prompt_0615175426_texture.glb";
+const MODEL_PATH = "/Clicktoread.glb";
 
 function RotatingPromptModel() {
   const group = useRef<any>();
