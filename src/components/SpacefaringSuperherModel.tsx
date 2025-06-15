@@ -3,6 +3,8 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, OrbitControls, useGLTF, useAnimations } from "@react-three/drei";
 import { useNavigate } from "react-router-dom";
 
+// IMPORTANT: The model file should be placed in the "public" folder at the project root.
+// The correct path to reference it in code is "/A_spacefaring_superhe_0615212155_texture.glb"
 const MODEL_PATH = "/A_spacefaring_superhe_0615212155_texture.glb";
 
 function SpacefaringSuperherModelMesh() {
