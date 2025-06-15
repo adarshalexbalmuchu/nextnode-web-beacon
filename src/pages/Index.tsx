@@ -45,7 +45,7 @@ const Index = () => {
       </section>
       
       {/* Section 2: Show Casual Walk Model at the center */}
-      <section className="relative w-full h-screen min-h-screen snap-start flex flex-col items-center justify-center bg-gradient-futuristic">
+      <section className="relative w-full h-screen min-h-screen snap-start flex flex-col items-center justify-center">
         <Background />
         <div className="flex justify-center items-center w-full h-full z-10">
           <CasualWalkModel />
@@ -53,7 +53,7 @@ const Index = () => {
       </section>
       
       {/* Section 3: Show Spacefaring Superhero Model at the center */}
-      <section className="relative w-full h-screen min-h-screen snap-start flex flex-col items-center justify-center bg-gradient-futuristic">
+      <section className="relative w-full h-screen min-h-screen snap-start flex flex-col items-center justify-center">
         <Background />
         <div className="flex justify-center items-center w-full h-full z-10">
           <SpacefaringSuperherModel />
