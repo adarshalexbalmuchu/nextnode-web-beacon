@@ -17,7 +17,6 @@ function BoxingModelMesh() {
     if (actions && Object.keys(actions).length > 0) {
       // Stop all actions first
       Object.values(actions).forEach((action) => action?.stop());
-      
       // Play the first available animation
       const firstAction = Object.values(actions)[0];
       firstAction?.reset().play();
@@ -53,12 +52,11 @@ const BoxingModel: React.FC = () => {
 
   return (
     <div
-      className="fixed right-8 top-1/2 z-20 cursor-pointer flex items-center"
+      className="fixed bottom-6 right-8 z-20 cursor-pointer flex items-end"
       style={{
         width: "300px",
-        height: "400px",
+        height: "350px",
         background: "none",
-        transform: "translateY(-50%)", // Centered vertically
       }}
       onClick={handleClick}
       title="Click to visit AI Tools"
