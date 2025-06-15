@@ -49,8 +49,8 @@ function RotatingAIToolModel() {
 
   return (
     <group ref={group}>
-      {/* Model is large enough for full viewport */}
-      <primitive object={gltf.scene} dispose={null} scale={1.2} />
+      {/* Reduce model scale by 20% from previous value */}
+      <primitive object={gltf.scene} dispose={null} scale={0.96} />
     </group>
   );
 }
