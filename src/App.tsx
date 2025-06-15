@@ -51,9 +51,7 @@ const App = () => {
             {/* Animation Preview */}
             <Route path="/animations" element={<AnimationPreview />} />
             {/* Hope Page 2 Loading transition */}
-            <Route path="/hope-loading" element={
-              React.createElement(require("./pages/HopePageLoading").default)
-            } />
+            <Route path="/hope-loading" element={<HopePageLoading />} />
             {/* Hope Page 2 with slide-down */}
             <Route path="/hope-page-2" element={<HopePage2 />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
