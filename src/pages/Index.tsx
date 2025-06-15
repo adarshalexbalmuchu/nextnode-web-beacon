@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Background from "@/components/Background";
 import AIToolModel from "@/components/AIToolModel";
 import CasualWalkModel from "@/components/CasualWalkModel";
+import SpacefaringSuperherModel from "@/components/SpacefaringSuperherModel";
 
 const Index = () => {
   return (
@@ -42,11 +43,20 @@ const Index = () => {
           </svg>
         </div>
       </section>
+      
       {/* Section 2: Show Casual Walk Model at the center */}
       <section className="relative w-full h-screen min-h-screen snap-start flex flex-col items-center justify-center bg-gradient-futuristic">
         <Background />
         <div className="flex justify-center items-center w-full h-full z-10">
           <CasualWalkModel />
+        </div>
+      </section>
+      
+      {/* Section 3: Show Spacefaring Superhero Model at the center */}
+      <section className="relative w-full h-screen min-h-screen snap-start flex flex-col items-center justify-center bg-gradient-futuristic">
+        <Background />
+        <div className="flex justify-center items-center w-full h-full z-10">
+          <SpacefaringSuperherModel />
         </div>
       </section>
     </div>
