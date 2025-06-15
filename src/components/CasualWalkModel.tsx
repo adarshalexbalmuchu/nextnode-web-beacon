@@ -39,7 +39,7 @@ function CasualWalkModelMesh() {
 
   return (
     <group ref={group}>
-      <primitive object={gltf.scene} dispose={null} scale={0.6} />
+      <primitive object={gltf.scene} dispose={null} scale={0.8} />
     </group>
   );
 }
@@ -58,7 +58,7 @@ const CasualWalkModel: React.FC = () => {
       title="Click to visit AI Blog"
     >
       <Canvas
-        camera={{ position: [0, 0, 4], fov: 50 }}
+        camera={{ position: [0, -0.5, 5], fov: 45 }}
         style={{
           background: "none",
           width: "100%",
