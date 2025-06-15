@@ -4,9 +4,9 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, OrbitControls, useGLTF, useAnimations } from "@react-three/drei";
 import { useNavigate } from "react-router-dom";
 
-const MODEL_PATH = "/AI_Tool_0615044424_texture.glb";
+const MODEL_PATH = "/Clickable_Prompt_0615175426_texture.glb";
 
-function RotatingAIToolModel() {
+function RotatingPromptModel() {
   const group = useRef<any>();
   const gltf = useGLTF(MODEL_PATH, true);
   const { actions } = useAnimations(gltf.animations, group);
@@ -28,15 +28,15 @@ function RotatingAIToolModel() {
   if (!gltf.scene) {
     return (
       <Html center>
-        <div style={{ color: "#0ff", textAlign: "center", fontSize: "14px" }}>
-          <div>AI Tool Animation Not Found</div>
+        <div style={{ color: "#ff0", textAlign: "center", fontSize: "14px" }}>
+          <div>Clicktoread 3D Model Not Found</div>
           <div style={{ fontSize: "12px", opacity: 0.7 }}>
             The 3D model file might be missing.<br />
             <a
               href={MODEL_PATH}
               target="_blank"
               rel="noopener noreferrer"
-              style={{ textDecoration: "underline", color: "#7ffcff" }}
+              style={{ textDecoration: "underline", color: "#ffdb3a" }}
             >
               Test if GLB is accessible
             </a>
@@ -54,11 +54,10 @@ function RotatingAIToolModel() {
   );
 }
 
-const AIToolModel: React.FC = () => {
+const ClickablePromptModel: React.FC = () => {
   const navigate = useNavigate();
-  const handleClick = () => navigate("/ai-blog-loading");
+  const handleClick = () => navigate("/ai-tool-page");
 
-  // Use an aspect-ratio box to ensure the model is always visible and never cropped.
   return (
     <div
       className="
@@ -68,15 +67,11 @@ const AIToolModel: React.FC = () => {
         sm:aspect-[4/3] md:aspect-[16/9]
       "
       onClick={handleClick}
-      title="Click to visit AI Blog"
+      title="Go to Clicktoread"
       tabIndex={0}
       role="button"
-      aria-label="Go to AI Blog"
+      aria-label="Go to Clicktoread"
       onKeyDown={e => (e.key === "Enter" || e.key === " ") && handleClick()}
-      style={{
-        // Let the parent control the space; this container simply preserves aspect ratio
-        // Remove cropping/margin/height/width restrictions
-      }}
     >
       <Canvas
         camera={{ position: [0, 1.3, 4], fov: 35 }}
@@ -88,27 +83,31 @@ const AIToolModel: React.FC = () => {
         }}
       >
         <ambientLight intensity={0.6} />
-        <directionalLight intensity={1.2} position={[5, 5, 5]} color="#7ffcff" />
-        <pointLight intensity={0.8} decay={1.6} distance={30} color="#00ffff" position={[0, 2, 3]} />
+        <directionalLight intensity={1.2} position={[5, 5, 5]} color="#ffdb3a" />
+        <pointLight intensity={0.8} decay={1.6} distance={30} color="#ffd700" position={[0, 2, 3]} />
         <Suspense 
           fallback={
-            <Html center style={{ color: "#0ff" }}>
+            <Html center style={{ color: "#ff0" }}>
               <div style={{ textAlign: "center", fontSize: "16px" }}>
-                <div>Loading AI Tool 3D Model...</div>
+                <div>Loading Clicktoread 3D Model...</div>
                 <div style={{ fontSize: "12px" }}>
-                  If stuck, <a href={MODEL_PATH} style={{ textDecoration: "underline", color: "#7ffcff" }} target="_blank" rel="noopener noreferrer">test the GLB link</a>
+                  If stuck, <a href={MODEL_PATH} style={{ textDecoration: "underline", color: "#ffdb3a" }} target="_blank" rel="noopener noreferrer">test the GLB link</a>
                 </div>
               </div>
             </Html>
           }
         >
-          <RotatingAIToolModel />
+          <RotatingPromptModel />
         </Suspense>
         <OrbitControls enablePan={false} enableZoom={false} enableRotate={false} />
       </Canvas>
+      {/* "Clicktoread" label below the model */}
+      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/60 text-yellow-400 rounded px-3 py-1 mt-2 text-xs font-bold pointer-events-none select-none backdrop-blur-sm shadow">
+        Clicktoread
+      </div>
     </div>
   );
 };
 
-export default AIToolModel;
+export default ClickablePromptModel;
 
