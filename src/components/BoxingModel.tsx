@@ -58,9 +58,19 @@ const BoxingModel: React.FC = () => {
 
   return (
     <div
-      className="fixed inset-0 z-20 flex items-center justify-center cursor-pointer select-none"
+      className="
+        fixed 
+        left-1/2 bottom-4 
+        z-30
+        flex items-end justify-center
+        cursor-pointer select-none
+        translate-x-[-50%]
+        w-[320px] h-[380px] 
+        sm:w-[220px] sm:h-[260px]
+      "
       style={{
         background: "none",
+        transform: "translateX(-50%)", // For left-1/2 positioning
       }}
       onClick={handleClick}
       title="Click to visit AI Tools"
@@ -73,8 +83,8 @@ const BoxingModel: React.FC = () => {
         camera={{ position: [0, 1, 4], fov: 35 }}
         style={{
           background: "none",
-          width: "100vw",
-          height: "100vh",
+          width: "100%",
+          height: "100%",
           display: "block"
         }}
       >
@@ -102,3 +112,4 @@ const BoxingModel: React.FC = () => {
 };
 
 export default BoxingModel;
+
