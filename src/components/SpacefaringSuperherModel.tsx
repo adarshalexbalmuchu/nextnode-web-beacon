@@ -13,6 +13,13 @@ function SpacefaringSuperherModelMesh() {
   const gltf = useGLTF(MODEL_PATH, true);
   const { actions } = useAnimations(gltf.animations, group);
 
+  // Add rotation animation
+  useFrame((state) => {
+    if (group.current) {
+      group.current.rotation.y += 0.005; // Slow rotation
+    }
+  });
+
   React.useEffect(() => {
     if (actions && Object.keys(actions).length > 0) {
       // Stop all actions first
@@ -39,7 +46,7 @@ function SpacefaringSuperherModelMesh() {
 
   return (
     <group ref={group}>
-      <primitive object={gltf.scene} dispose={null} scale={0.8} />
+      <primitive object={gltf.scene} dispose={null} scale={1.5} />
     </group>
   );
 }
@@ -65,9 +72,19 @@ const SpacefaringSuperherModel: React.FC = () => {
           height: "100%",
         }}
       >
-        <ambientLight intensity={0.6} />
-        <directionalLight intensity={1.2} position={[5, 5, 5]} color="#7ffcff" />
-        <pointLight intensity={0.8} decay={1.6} distance={30} color="#00ffff" position={[0, 2, 3]} />
+        <ambientLight intensity={0.8} />
+        <directionalLight intensity={1.5} position={[5, 5, 5]} color="#7ffcff" />
+        <directionalLight intensity={0.8} position={[-5, 3, -5]} color="#00ffff" />
+        <pointLight intensity={1.2} decay={1.6} distance={40} color="#00ffff" position={[0, 2, 3]} />
+        <pointLight intensity={0.6} decay={2} distance={30} color="#7ffcff" position={[3, -2, -3]} />
+        <spotLight
+          intensity={2}
+          position={[0, 10, 0]}
+          angle={0.3}
+          penumbra={0.5}
+          color="#00ffff"
+          target-position={[0, 0, 0]}
+        />
         
         <Suspense 
           fallback={
