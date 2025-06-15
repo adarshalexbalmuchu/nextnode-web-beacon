@@ -2,8 +2,18 @@
 import React from "react";
 import Header from "@/components/Header";
 import Background from "@/components/Background";
+import AIBlogLoadingPage from "@/components/AIBlogLoadingPage";
 
 const AIBlog = () => {
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1800); // ~1.8s, tweak as desired
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) return <AIBlogLoadingPage />;
+
   return (
     <div className="min-h-screen w-full flex flex-col relative bg-transparent overflow-x-hidden">
       <Background />
@@ -24,4 +34,5 @@ const AIBlog = () => {
     </div>
   );
 };
+
 export default AIBlog;
