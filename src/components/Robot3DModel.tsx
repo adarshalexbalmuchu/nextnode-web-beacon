@@ -20,7 +20,7 @@ function RobotModel() {
       ref={ref}
       object={gltf.scene}
       dispose={null}
-      scale={1.5} // Slightly reduced for best fit
+      scale={1.2}
     />
   );
 }
@@ -29,16 +29,16 @@ const Robot3DModel: React.FC = () => {
   const navigate = useNavigate();
   return (
     <div
-      className="absolute left-0 top-1/2 -translate-y-1/2 z-20"
+      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/4 z-20"
       style={{
         width: "100%",
-        maxWidth: "430px",
-        height: "520px",
-        maxHeight: "98vh",
+        maxWidth: "500px",
+        height: "600px",
+        maxHeight: "70vh",
         cursor: "pointer",
         background: "none",
-        minWidth: "220px",
-        minHeight: "220px",
+        minWidth: "300px",
+        minHeight: "300px",
       }}
       title="Go to AI Blog"
       onClick={() => navigate("/ai-blog")}
