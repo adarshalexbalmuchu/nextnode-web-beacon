@@ -1,3 +1,4 @@
+
 import React, { Suspense, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, OrbitControls, useGLTF, useAnimations } from "@react-three/drei";
@@ -57,6 +58,7 @@ const AIToolModel: React.FC = () => {
         width: "350px",
         height: "450px",
         background: "none",
+        transform: "translate(-50%, -40%)", // Changed from -50% to -40% to move it down
       }}
       onClick={handleClick}
       title="Click to visit AI Courses"
