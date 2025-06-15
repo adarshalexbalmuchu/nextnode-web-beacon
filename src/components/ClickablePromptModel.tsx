@@ -1,4 +1,3 @@
-
 import React, { Suspense, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, OrbitControls, useGLTF, useAnimations } from "@react-three/drei";
@@ -102,7 +101,7 @@ const ClickablePromptModel: React.FC = () => {
         <OrbitControls enablePan={false} enableZoom={false} enableRotate={false} />
       </Canvas>
       {/* "Clicktoread" label below the model */}
-      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/60 text-yellow-400 rounded px-3 py-1 mt-2 text-xs font-bold pointer-events-none select-none backdrop-blur-sm shadow">
+      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 bg-black/60 text-yellow-400 rounded px-2 py-0.5 text-[10px] font-semibold pointer-events-none select-none backdrop-blur-sm shadow-sm">
         Clicktoread
       </div>
     </div>
@@ -110,4 +109,3 @@ const ClickablePromptModel: React.FC = () => {
 };
 
 export default ClickablePromptModel;
-
