@@ -1,4 +1,3 @@
-
 import React, { Suspense, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, OrbitControls, useGLTF, useAnimations } from "@react-three/drei";
@@ -39,7 +38,7 @@ function AIToolModelMesh() {
 
   return (
     <group ref={group}>
-      <primitive object={gltf.scene} dispose={null} scale={1.2} />
+      <primitive object={gltf.scene} dispose={null} scale={0.8} />
     </group>
   );
 }
