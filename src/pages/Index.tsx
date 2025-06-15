@@ -7,7 +7,7 @@ import AIToolModel from "@/components/AIToolModel";
 const Index = () => {
   return (
     <div
-      className="fixed inset-0 w-full h-full min-h-screen max-h-screen overflow-y-auto snap-y snap-mandatory"
+      className="w-full h-screen min-h-screen overflow-y-scroll snap-y snap-mandatory"
       style={{
         scrollBehavior: "smooth",
         WebkitOverflowScrolling: "touch",
@@ -16,10 +16,12 @@ const Index = () => {
       {/* Section 1: Home (existing) */}
       <section className="relative w-full h-screen min-h-screen snap-start flex flex-col">
         <Background />
-        <AIToolModel />
-        <Header />
-        {/* Scroll Down Indicator */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 pointer-events-none flex flex-col items-center">
+        <div className="flex flex-1 flex-col items-center justify-center relative z-10">
+          <AIToolModel />
+          <Header />
+        </div>
+        {/* SCROLL DOWN indicator if you want it visible */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 pointer-events-none flex flex-col items-center z-20">
           <span className="text-cyan-400 text-xs mb-1 tracking-wider animate-fade-in">
             SCROLL DOWN
           </span>
@@ -51,3 +53,4 @@ const Index = () => {
 };
 
 export default Index;
+

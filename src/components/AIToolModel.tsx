@@ -59,15 +59,11 @@ const AIToolModel: React.FC = () => {
   const navigate = useNavigate();
   const handleClick = () => navigate("/ai-blog-loading");
 
-  // Fullscreen, always centered, canvas stretches to window
+  // Place inside regular container (not fixed), centered and responsive
   return (
     <div
       className="
-        fixed inset-0 z-30
-        flex items-center justify-center
-        w-screen h-screen
-        cursor-pointer select-none
-        bg-transparent
+        flex flex-1 items-center justify-center w-full h-full cursor-pointer select-none bg-transparent
       "
       onClick={handleClick}
       title="Click to visit AI Blog"
@@ -75,13 +71,17 @@ const AIToolModel: React.FC = () => {
       role="button"
       aria-label="Go to AI Blog"
       onKeyDown={e => (e.key === "Enter" || e.key === " ") && handleClick()}
+      style={{
+        // Take up available parent (section) space
+        minHeight: 0,
+      }}
     >
       <Canvas
         camera={{ position: [0, 1.3, 4], fov: 35 }}
         style={{
           background: "none",
-          width: "100vw",
-          height: "100vh",
+          width: "100%",
+          height: "100%",
           display: "block"
         }}
       >
@@ -109,3 +109,4 @@ const AIToolModel: React.FC = () => {
 };
 
 export default AIToolModel;
+
