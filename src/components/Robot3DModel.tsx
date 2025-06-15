@@ -20,7 +20,7 @@ function RobotModel() {
       ref={ref}
       object={gltf.scene}
       dispose={null}
-      // Glow effect via meshPhysicalMaterial + postprocessing in future
+      scale={1.75} // Increased size
     />
   );
 }
