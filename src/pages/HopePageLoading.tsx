@@ -11,10 +11,11 @@ const HopePageLoading: React.FC = () => {
 
   useEffect(() => {
     setStart(true);
-    // Very short delay for the flash/slide – increase if more visible animation needed
+    // Animate for a visible time (increase duration for clarity)
+    // 1000ms = 1 second, adjust as needed; original was 550ms, too short for transition
     const timeout = setTimeout(() => {
       navigate("/hope-page-2", { replace: true });
-    }, 550);
+    }, 950);
     return () => clearTimeout(timeout);
   }, [navigate]);
 
@@ -40,3 +41,4 @@ const HopePageLoading: React.FC = () => {
 };
 
 export default HopePageLoading;
+
