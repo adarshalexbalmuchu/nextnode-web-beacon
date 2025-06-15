@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Search, User, LayoutDashboard } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
@@ -36,6 +37,10 @@ const Header = () => {
     // If user is logged in but not admin, do nothing/silent
   };
 
+  const handleLogoClick = () => {
+    navigate("/");
+  };
+
   return (
     <header className="w-full flex items-center justify-between px-2 md:px-6 py-5 bg-[#101622]/80 backdrop-blur-sm shadow-lg sticky top-0 z-30 border-b border-[#202A3D]">
       <div className="flex items-center gap-2">
@@ -44,6 +49,7 @@ const Header = () => {
           alt="NextNode Logo"
           className="h-12 w-auto drop-shadow-md cursor-pointer transition-all duration-200 logo-hover-glow"
           draggable={false}
+          onClick={handleLogoClick}
         />
       </div>
       {/* Navigation */}
