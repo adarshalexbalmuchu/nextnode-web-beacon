@@ -1,4 +1,3 @@
-
 import React, { Suspense, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, OrbitControls, useGLTF, useAnimations } from "@react-three/drei";
@@ -48,8 +47,8 @@ function RotatingAIToolModel() {
 
   return (
     <group ref={group}>
-      {/* Model scale adjusted to be bigger, but still leaves space below */}
-      <primitive object={gltf.scene} dispose={null} scale={0.85} />
+      {/* Model scale set to 1 (100%) */}
+      <primitive object={gltf.scene} dispose={null} scale={1} />
     </group>
   );
 }
