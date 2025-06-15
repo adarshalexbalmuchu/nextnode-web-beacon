@@ -20,8 +20,8 @@ const Header = () => {
     navigate("/");
   };
 
-  const handleHopePage2 = () => {
-    navigate("/hope-page-2");
+  const handleAIToolPage = () => {
+    navigate("/ai-tool-page");
   };
 
   return (
@@ -43,10 +43,10 @@ const Header = () => {
       <div className="flex items-center gap-5 text-white">
         <button
           className="hover:text-cyan-400 transition-all focus:outline-none"
-          title="Slide Down to Hope Page 2"
-          aria-label="Open Hope Page 2"
+          title="Slide Down to AI Tool Page"
+          aria-label="Open AI Tool Page"
           type="button"
-          onClick={handleHopePage2}
+          onClick={handleAIToolPage}
         >
           <ArrowDown size={22} />
         </button>
@@ -64,3 +64,4 @@ const Header = () => {
 };
 
 export default Header;
+

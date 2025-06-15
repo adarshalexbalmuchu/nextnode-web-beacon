@@ -1,23 +1,22 @@
-
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AIToolModel from "@/components/AIToolModel";
 
-const HopePageLoading: React.FC = () => {
+const AIToolPageLoading: React.FC = () => {
   const navigate = useNavigate();
   const [start, setStart] = useState(false);
 
   useEffect(() => {
     setStart(true);
     const timeout = setTimeout(() => {
-      navigate("/hope-page-2", { replace: true });
+      navigate("/ai-tool-page", { replace: true });
     }, 1700); // Long enough to see animation
     return () => clearTimeout(timeout);
   }, [navigate]);
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-transparent">
-      {/* Futuristic Background (matches HopePage2) */}
+      {/* Futuristic Background (matches AI Tool Page) */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[hsl(var(--background))] via-[hsl(var(--background))] to-[hsl(var(--card))]" />
       {/* Animated AI Tool 3D Model with entrance flash */}
       <div
@@ -25,7 +24,6 @@ const HopePageLoading: React.FC = () => {
           start ? "animate-hope-flash-fast" : ""
         }`}
         style={{
-          // Make sure the 3D model looks bright during animation
           filter:
             "brightness(2.5) drop-shadow(0 0 60px #0ff) drop-shadow(0 0 130px #00fff7)",
           willChange: "transform, opacity",
@@ -40,5 +38,4 @@ const HopePageLoading: React.FC = () => {
   );
 };
 
-export default HopePageLoading;
-
+export default AIToolPageLoading;
