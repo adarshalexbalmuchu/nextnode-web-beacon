@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -14,6 +13,7 @@ import AITools from "./pages/AITools";
 import AICourses from "./pages/AICourses";
 import AnimationPreview from "./pages/AnimationPreview";
 import React from "react";
+import AIBlogModelLoadingPage from "@/components/AIBlogModelLoadingPage";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +42,8 @@ const App = () => {
             <Route path="/auth" element={<AuthPage />} />
             {/* AI Blog */}
             <Route path="/ai-blog" element={<AIBlog />} />
+            {/* New: AI Blog animated intro */}
+            <Route path="/ai-blog-loading" element={<AIBlogModelLoadingPage />} />
             {/* AI Tools */}
             <Route path="/ai-tools" element={<AITools />} />
             {/* Animation Preview */}
