@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Background from "./Background";
 
 // Path to GLB model (must be present in public directory)
-const MODEL_PATH = "/Animation_Boxing_Practice_withSkin.glb"; // Changed to available model
+const MODEL_PATH = "/AI_Tool_0615044424_texture.glb"; // Ensure this matches the name in /public
 
 // Rotating & glowing AI Tool model
 function FastGlowAIToolModel() {
