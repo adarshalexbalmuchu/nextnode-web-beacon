@@ -77,8 +77,8 @@ const AIToolModel: React.FC = () => {
         width: "350px",
         height: "480px",
         background: "none",
-        // Model stays centered, slightly up for more optimal spacing
-        transform: "translate(-50%, -28%)"
+        // Model stays centered, moved lower for more optimal spacing
+        transform: "translate(-50%, -18%)"
       }}
     >
       <div
