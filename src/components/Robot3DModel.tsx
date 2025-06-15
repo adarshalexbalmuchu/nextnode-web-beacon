@@ -30,14 +30,20 @@ const Robot3DModel: React.FC = () => {
   return (
     <div
       className="absolute left-0 top-1/2 -translate-y-1/2 z-20"
-      style={{ width: "280px", height: "360px", cursor: "pointer" }}
+      style={{
+        width: "280px",
+        height: "360px",
+        cursor: "pointer",
+        // Remove any background
+        background: "none",
+      }}
       title="Go to AI Blog"
       onClick={() => navigate("/ai-blog")}
     >
       <Canvas
         camera={{ position: [0, 1, 4.5], fov: 35 }}
         style={{
-          background: "transparent",
+          background: "none", // Ensure canvas background is transparent
         }}
       >
         <ambientLight intensity={0.8} />
@@ -45,24 +51,12 @@ const Robot3DModel: React.FC = () => {
         {/* Neon Glow: big point light, slightly behind model */}
         <pointLight intensity={1.2} decay={1.6} distance={50} color="#00ffff" position={[0, 3, 6]} />
         <Suspense fallback={<Html center style={{ color: "#0ff" }}>Loading…</Html>}>
-          <group>
-            <RobotModel />
-            {/* If you want extra glowing halo: */}
-            <mesh position={[0, -0.1, 0]}>
-              <sphereGeometry args={[1.5, 32, 32]} />
-              <meshBasicMaterial color="#00ffd0" transparent opacity={0.22} />
-            </mesh>
-          </group>
+          {/* Remove group and mesh bubble */}
+          <RobotModel />
         </Suspense>
         <OrbitControls enablePan={false} enableZoom={false} />
       </Canvas>
-      {/* Glow overlay for div */}
-      <div className="pointer-events-none absolute inset-0 rounded-2xl"
-           style={{
-             boxShadow: "0 0 44px 16px #0ff7, 0 0 80px 36px #00ffc9c7",
-             filter: "blur(0.5px) brightness(1.04)",
-             zIndex: 1,
-           }} />
+      {/* Remove the outer glow overlay div */}
     </div>
   );
 };
