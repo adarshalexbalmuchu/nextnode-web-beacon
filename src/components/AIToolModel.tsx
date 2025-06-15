@@ -1,11 +1,10 @@
-
 import React, { Suspense, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, OrbitControls, useGLTF, useAnimations } from "@react-three/drei";
 import { useNavigate } from "react-router-dom";
 
 // Path to GLB model (must be present in public directory)
-const MODEL_PATH = "/AI_Tool_0615044424_texture.glb";
+const MODEL_PATH = "/Animation_Boxing_Practice_withSkin.glb"; // Changed to available model
 
 // Reusable rotating mesh for AI tool model
 function RotatingAIToolModel() {
@@ -125,4 +124,3 @@ const AIToolModel: React.FC = () => {
 };
 
 export default AIToolModel;
-
