@@ -15,7 +15,7 @@ const AIBlog = () => {
   if (loading) return <AIBlogLoadingPage />;
 
   return (
-    <div className="min-h-screen w-full flex flex-col relative bg-transparent overflow-x-hidden">
+    <div className="min-h-screen w-full flex flex-col relative overflow-x-hidden">
       <Background />
       <Header />
       <main className="flex-1 flex flex-col items-center justify-center px-4 z-10 relative text-center">

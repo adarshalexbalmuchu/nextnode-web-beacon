@@ -47,7 +47,7 @@ const AITools = () => {
   ];
 
   return (
-    <div className="min-h-screen w-full flex flex-col relative bg-transparent overflow-x-hidden">
+    <div className="min-h-screen w-full flex flex-col relative overflow-x-hidden">
       <Background />
       <Header />
       
