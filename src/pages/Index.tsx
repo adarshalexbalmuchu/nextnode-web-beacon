@@ -2,6 +2,7 @@
 import Header from "@/components/Header";
 import Background from "@/components/Background";
 import CasualWalkModel from "@/components/CasualWalkModel";
+import BoxingModel from "@/components/BoxingModel";
 
 const Index = () => {
   return (
@@ -10,6 +11,8 @@ const Index = () => {
       <Background />
       {/* Casual walk animation in the center that opens AI Blog */}
       <CasualWalkModel />
+      {/* Boxing animation on the right that opens AI Tools */}
+      <BoxingModel />
       <Header />
     </div>
   );

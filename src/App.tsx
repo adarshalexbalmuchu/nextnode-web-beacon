@@ -10,6 +10,7 @@ import LoadingPage from "@/components/LoadingPage";
 import AdminDashboard from "./pages/AdminDashboard";
 import AuthPage from "./pages/Auth";
 import AIBlog from "./pages/AIBlog";
+import AITools from "./pages/AITools";
 import AnimationPreview from "./pages/AnimationPreview";
 import React from "react";
 
@@ -40,6 +41,8 @@ const App = () => {
             <Route path="/auth" element={<AuthPage />} />
             {/* AI Blog */}
             <Route path="/ai-blog" element={<AIBlog />} />
+            {/* AI Tools */}
+            <Route path="/ai-tools" element={<AITools />} />
             {/* Animation Preview */}
             <Route path="/animations" element={<AnimationPreview />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
