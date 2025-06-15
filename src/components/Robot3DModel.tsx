@@ -31,10 +31,11 @@ const Robot3DModel: React.FC = () => {
     <div
       className="absolute left-0 top-1/2 -translate-y-1/2 z-20"
       style={{
-        width: "280px",
-        height: "360px",
+        width: "370px",
+        height: "470px",
+        maxWidth: "95vw",
+        maxHeight: "85vh",
         cursor: "pointer",
-        // Remove any background
         background: "none",
       }}
       title="Go to AI Blog"
@@ -43,20 +44,19 @@ const Robot3DModel: React.FC = () => {
       <Canvas
         camera={{ position: [0, 1, 4.5], fov: 35 }}
         style={{
-          background: "none", // Ensure canvas background is transparent
+          background: "none",
+          width: "100%",
+          height: "100%",
         }}
       >
         <ambientLight intensity={0.8} />
         <directionalLight intensity={1.9} position={[8, 10, 20]} color="#7ffcff" />
-        {/* Neon Glow: big point light, slightly behind model */}
         <pointLight intensity={1.2} decay={1.6} distance={50} color="#00ffff" position={[0, 3, 6]} />
         <Suspense fallback={<Html center style={{ color: "#0ff" }}>Loading…</Html>}>
-          {/* Remove group and mesh bubble */}
           <RobotModel />
         </Suspense>
         <OrbitControls enablePan={false} enableZoom={false} />
       </Canvas>
-      {/* Remove the outer glow overlay div */}
     </div>
   );
 };
