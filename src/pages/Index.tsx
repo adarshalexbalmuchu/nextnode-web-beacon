@@ -1,3 +1,4 @@
+
 import React from "react";
 import Header from "@/components/Header";
 import Background from "@/components/Background";
@@ -13,17 +14,17 @@ const Index = () => {
         WebkitOverflowScrolling: "touch",
       }}
     >
-      {/* Section 1: Home (existing) */}
+      {/* Section 1: Home */}
       <section className="relative w-full h-screen min-h-screen snap-start flex flex-col">
         <Background />
-        <div className="flex flex-1 flex-col items-center justify-start relative z-10 min-h-0">
+        <div className="flex flex-1 flex-col items-center justify-start relative z-10 min-h-0 w-full">
           <Header />
-          {/* Add vertical stack: Clicktoread model above AI Tool model */}
-          <div className="flex flex-col items-center w-full gap-6" style={{ marginTop: "32px", marginBottom: "40px" }}>
-            <div className="w-full max-w-2xl relative flex items-center justify-center">
+          {/* Models directly below header, centered */}
+          <div className="flex flex-col items-center w-full pt-8 gap-7">
+            <div className="w-full max-w-2xl flex items-center justify-center">
               <ClickablePromptModel scale={0.1} />
             </div>
-            <div className="w-full max-w-2xl relative flex items-center justify-center mt-6">
+            <div className="w-full max-w-2xl flex items-center justify-center">
               <AIToolModel />
             </div>
           </div>
@@ -61,3 +62,4 @@ const Index = () => {
 };
 
 export default Index;
+
