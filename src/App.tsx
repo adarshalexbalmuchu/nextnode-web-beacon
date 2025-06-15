@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import LoadingPage from "@/components/LoadingPage";
 import AdminDashboard from "./pages/AdminDashboard";
 import AuthPage from "./pages/Auth";
+import AIBlog from "./pages/AIBlog";
 import React from "react";
 
 const queryClient = new QueryClient();
@@ -35,6 +36,8 @@ const App = () => {
             <Route path="/admin" element={<AdminDashboard />} />
             {/* Auth Page */}
             <Route path="/auth" element={<AuthPage />} />
+            {/* AI Blog */}
+            <Route path="/ai-blog" element={<AIBlog />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

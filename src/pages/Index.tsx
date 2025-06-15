@@ -1,12 +1,14 @@
-
 import Header from "@/components/Header";
 import Background from "@/components/Background";
+import Robot3DModel from "@/components/Robot3DModel";
 
 const Index = () => {
   return (
     <div className="min-h-screen w-full flex flex-col relative bg-transparent overflow-x-hidden">
       {/* Futuristic animated background layer */}
       <Background />
+      {/* Place robot on the left, floating absolutely */}
+      <Robot3DModel />
       <Header />
       <main className="flex-1 flex flex-col items-center justify-center px-4 z-10 relative text-center">
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 text-white leading-tight text-glow animate-fade-in">
