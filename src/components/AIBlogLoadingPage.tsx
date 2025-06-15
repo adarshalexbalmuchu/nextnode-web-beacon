@@ -1,45 +1,112 @@
-import React, { useEffect, useState } from "react";
+
+import React, { useRef, useEffect } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Html, useGLTF, useAnimations } from "@react-three/drei";
+import { useNavigate } from "react-router-dom";
 import Background from "./Background";
 
-// Use the same logo as main LoadingPage.
-const LOGO_SRC = "/lovable-uploads/55b69b94-d123-47b8-ad9e-8f72a7b53471.png";
+// Path to GLB model (must be present in public directory)
+const MODEL_PATH = "/AI_Blog_0615040357_texture.glb";
 
-const AIBlogLoadingPage: React.FC = () => {
-  const [glow, setGlow] = useState(false);
+// Rotating & glowing AI Blog 3D model
+function FastGlowAIBlogModel() {
+  const group = useRef<any>();
+  const gltf = useGLTF(MODEL_PATH, true);
+  const { actions } = useAnimations(gltf.animations, group);
 
   useEffect(() => {
-    const timer = setTimeout(() => setGlow(true), 550);
-    return () => clearTimeout(timer);
-  }, []);
+    if (actions && Object.keys(actions).length > 0) {
+      Object.values(actions).forEach((action) => action?.stop());
+      const firstAction = Object.values(actions)[0];
+      firstAction?.reset().play();
+    }
+  }, [actions]);
+
+  useFrame(() => {
+    if (group.current) {
+      group.current.rotation.y += 0.025; // A bit faster for loading
+    }
+  });
+
+  if (!gltf.scene) {
+    return (
+      <Html center>
+        <div style={{ color: "#0ff", textAlign: "center", fontSize: "17px" }}>
+          <div>Loading...</div>
+        </div>
+      </Html>
+    );
+  }
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 bg-transparent">
-      {/* Background: KEEP SAME as app */}
+    <group ref={group}>
+      <primitive object={gltf.scene} dispose={null} scale={0.9} />
+    </group>
+  );
+}
+
+const AIBlogLoadingPage: React.FC = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      navigate("/ai-blog", { replace: true });
+    }, 1600);
+    return () => clearTimeout(timeout);
+  }, [navigate]);
+
+  return (
+    <div className="fixed inset-0 flex items-center justify-center z-50 bg-transparent select-none">
       <Background />
-      <div className="flex flex-col items-center justify-center w-full h-full">
-        {/* Logo, with extra outer glow/zoom animation */}
-        <img
-          src={LOGO_SRC}
-          alt="AI Blog Loading"
-          className={
-            `mx-auto
-            w-52 h-52
-            sm:w-80 sm:h-80
-            md:w-[26rem] md:h-[26rem]
-            object-contain transition-all duration-900
-            ${glow
-              ? "brightness-[2.7] drop-shadow-[0_0_82px_cyan] drop-shadow-[0_0_180px_rgba(0,255,255,0.82)] scale-[1.15] animate-logo-glow"
-              : "brightness-[1.7] scale-100"
-            }
-            `
-          }
+      <div
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center pointer-events-auto"
+        style={{
+          width: "340px",
+          height: "420px",
+          // center a bit higher for aesthetics
+          transform: "translate(-50%, -34%)",
+        }}
+      >
+        <div
           style={{
-            filter: glow
-              ? "brightness(2.7) drop-shadow(0 0 82px cyan) drop-shadow(0 0 180px rgba(0,255,255,0.82))"
-              : "brightness(1.7)"
+            width: "100%",
+            height: "390px",
+            filter:
+              "drop-shadow(0 0 66px #00f7ff) drop-shadow(0 0 108px #00eaffb9)",
+            transition: "filter 0.3s",
           }}
-          draggable={false}
-        />
+        >
+          <Canvas
+            camera={{ position: [0, 1, 4], fov: 35 }}
+            style={{
+              background: "none",
+              width: "100%",
+              height: "100%",
+              display: "block",
+            }}
+          >
+            <ambientLight intensity={1.0} color="#66ffff" />
+            <directionalLight intensity={1.4} position={[4, 5, 8]} color="#9ff" />
+            <pointLight
+              intensity={2.2}
+              decay={1.9}
+              distance={40}
+              color="#00ffff"
+              position={[0, 3, 3]}
+            />
+            <React.Suspense
+              fallback={
+                <Html center style={{ color: "#0ff" }}>
+                  <div style={{ textAlign: "center", fontSize: "16px" }}>
+                    <div>Loading...</div>
+                  </div>
+                </Html>
+              }
+            >
+              <FastGlowAIBlogModel />
+            </React.Suspense>
+          </Canvas>
+        </div>
       </div>
     </div>
   );
