@@ -58,19 +58,8 @@ const Header = () => {
           </a>
         ))}
       </nav>
-      {/* Right Side: Only User Icon & Dashboard link if admin */}
+      {/* Right Side: Only User Icon */}
       <div className="flex items-center gap-5 text-white">
-        {/* Dashboard button for admin */}
-        {user && role === "admin" && (
-          <a
-            href="/admin"
-            className="hover:text-cyan-400 focus:outline-none transition-colors"
-            title="Dashboard"
-            aria-label="Dashboard"
-          >
-            <LayoutDashboard size={22} />
-          </a>
-        )}
         {/* Only one User (admin human) icon, handles login/dashboard */}
         <button
           className="hover:text-cyan-400 focus:outline-none"
