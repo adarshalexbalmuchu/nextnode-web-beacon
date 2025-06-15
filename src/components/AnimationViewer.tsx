@@ -5,38 +5,32 @@ import { Html, OrbitControls, useGLTF, useAnimations } from "@react-three/drei";
 import { Button } from "@/components/ui/button";
 
 const animations = [
-  { name: "Boxing Practice", path: "./Animation_Boxing_Practice_withSkin.glb" },
-  { name: "Casual Walk", path: "./Animation_Casual_Walk_withSkin.glb" },
-  { name: "Running", path: "./Animation_Running_withSkin.glb" },
-  { name: "Skill 01", path: "./Animation_Skill_01_withSkin.glb" },
-  { name: "Walking", path: "./Animation_Walking_withSkin.glb" }
+  { name: "Boxing Practice", path: "/Animation_Boxing_Practice_withSkin.glb" },
+  { name: "Casual Walk", path: "/Animation_Casual_Walk_withSkin.glb" },
+  { name: "Running", path: "/Animation_Running_withSkin.glb" },
+  { name: "Skill 01", path: "/Animation_Skill_01_withSkin.glb" },
+  { name: "Walking", path: "/Animation_Walking_withSkin.glb" }
 ];
 
 function AnimatedModel({ modelPath }: { modelPath: string }) {
   const group = useRef<any>();
   
-  try {
-    const { scene, animations } = useGLTF(modelPath);
-    const { actions } = useAnimations(animations, group);
+  // Always call hooks in the same order
+  const gltf = useGLTF(modelPath, true);
+  const { actions } = useAnimations(gltf.animations, group);
 
-    React.useEffect(() => {
+  React.useEffect(() => {
+    if (actions && Object.keys(actions).length > 0) {
       // Stop all actions first
       Object.values(actions).forEach((action) => action?.stop());
       
       // Play the first available animation
-      if (actions && Object.keys(actions).length > 0) {
-        const firstAction = Object.values(actions)[0];
-        firstAction?.reset().play();
-      }
-    }, [actions, modelPath]);
+      const firstAction = Object.values(actions)[0];
+      firstAction?.reset().play();
+    }
+  }, [actions, modelPath]);
 
-    return (
-      <group ref={group}>
-        <primitive object={scene} dispose={null} scale={1.2} />
-      </group>
-    );
-  } catch (error) {
-    console.log(`Animation model not found: ${modelPath}`);
+  if (!gltf.scene) {
     return (
       <Html center>
         <div style={{ color: "#0ff", textAlign: "center", fontSize: "14px" }}>
@@ -48,6 +42,12 @@ function AnimatedModel({ modelPath }: { modelPath: string }) {
       </Html>
     );
   }
+
+  return (
+    <group ref={group}>
+      <primitive object={gltf.scene} dispose={null} scale={1.2} />
+    </group>
+  );
 }
 
 const AnimationViewer: React.FC = () => {

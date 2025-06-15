@@ -4,33 +4,27 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, OrbitControls, useGLTF, useAnimations } from "@react-three/drei";
 import { useNavigate } from "react-router-dom";
 
-const MODEL_PATH = "./Animation_Boxing_Practice_withSkin.glb";
+const MODEL_PATH = "/Animation_Boxing_Practice_withSkin.glb";
 
 function BoxingModelMesh() {
   const group = useRef<any>();
   
-  try {
-    const { scene, animations } = useGLTF(MODEL_PATH);
-    const { actions } = useAnimations(animations, group);
+  // Always call hooks in the same order
+  const gltf = useGLTF(MODEL_PATH, true);
+  const { actions } = useAnimations(gltf.animations, group);
 
-    React.useEffect(() => {
+  React.useEffect(() => {
+    if (actions && Object.keys(actions).length > 0) {
       // Stop all actions first
       Object.values(actions).forEach((action) => action?.stop());
       
       // Play the first available animation
-      if (actions && Object.keys(actions).length > 0) {
-        const firstAction = Object.values(actions)[0];
-        firstAction?.reset().play();
-      }
-    }, [actions]);
+      const firstAction = Object.values(actions)[0];
+      firstAction?.reset().play();
+    }
+  }, [actions]);
 
-    return (
-      <group ref={group}>
-        <primitive object={scene} dispose={null} scale={1.0} />
-      </group>
-    );
-  } catch (error) {
-    console.log("Boxing animation not found");
+  if (!gltf.scene) {
     return (
       <Html center>
         <div style={{ color: "#0ff", textAlign: "center", fontSize: "14px" }}>
@@ -42,6 +36,12 @@ function BoxingModelMesh() {
       </Html>
     );
   }
+
+  return (
+    <group ref={group}>
+      <primitive object={gltf.scene} dispose={null} scale={1.0} />
+    </group>
+  );
 }
 
 const BoxingModel: React.FC = () => {
