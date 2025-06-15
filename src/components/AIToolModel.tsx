@@ -1,19 +1,19 @@
+
 import React, { Suspense, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, OrbitControls, useGLTF, useAnimations } from "@react-three/drei";
 import { useNavigate } from "react-router-dom";
 
+// Path to GLB model (must be present in public directory)
 const MODEL_PATH = "/AI_Tool_0615044424_texture.glb";
 
-// Rotating mesh with animation
-function AIToolModelMesh() {
+// Reusable rotating mesh for AI tool model
+function RotatingAIToolModel() {
   const group = useRef<any>();
-  
-  // Hooks must be in same order
   const gltf = useGLTF(MODEL_PATH, true);
   const { actions } = useAnimations(gltf.animations, group);
 
-  // Model idle animation logic (keep, though not visibly running)
+  // Play idle animation (if available)
   React.useEffect(() => {
     if (actions && Object.keys(actions).length > 0) {
       Object.values(actions).forEach((action) => action?.stop());
@@ -22,10 +22,10 @@ function AIToolModelMesh() {
     }
   }, [actions]);
 
-  // Add Y axis rotation for the parent group
+  // Continuous rotation around Y-axis
   useFrame(() => {
     if (group.current) {
-      group.current.rotation.y += 0.009; // smooth continuous rotation
+      group.current.rotation.y += 0.009;
     }
   });
 
@@ -49,25 +49,39 @@ function AIToolModelMesh() {
   );
 }
 
+// Separated AI Blogs interactive link/text
+function AIBlogsText({ onClick }: { onClick: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      className="mt-5 px-4 py-2 rounded bg-[rgba(20,36,52,0.24)] border border-cyan-300/30 shadow text-cyan-200 font-extrabold tracking-wide text-xl md:text-2xl animate-fade-in hover-scale focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300 underline underline-offset-4"
+      style={{
+        textShadow: "0 0 18px #00fff999,0 0 2px #16f8edee"
+      }}
+      aria-label="Visit AI Blogs"
+      tabIndex={0}
+    >
+      AI Blogs
+    </button>
+  );
+}
+
 const AIToolModel: React.FC = () => {
   const navigate = useNavigate();
-
-  // Both the model and the overlay text should navigate to /ai-blog
-  const handleClick = () => {
-    navigate("/ai-blog");
-  };
+  // Click handler for navigation
+  const handleClick = () => navigate("/ai-blog");
 
   return (
     <div
       className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center cursor-pointer select-none"
       style={{
         width: "350px",
-        height: "470px", // slightly taller for text space
+        height: "480px",
         background: "none",
-        transform: "translate(-50%, -30%)" // moves it a bit further down
+        // Move model and text slightly down for better desktop/mobile positioning
+        transform: "translate(-50%, -22%)"
       }}
     >
-      {/* 3D Canvas with rotating model */}
       <div
         style={{ width: "100%", height: "400px" }}
         onClick={handleClick}
@@ -76,7 +90,7 @@ const AIToolModel: React.FC = () => {
         role="button"
         aria-label="Go to AI Blog"
         className="outline-none"
-        onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && handleClick()}
+        onKeyDown={e => (e.key === "Enter" || e.key === " ") && handleClick()}
       >
         <Canvas
           camera={{ position: [0, 1, 4], fov: 35 }}
@@ -90,7 +104,6 @@ const AIToolModel: React.FC = () => {
           <ambientLight intensity={0.6} />
           <directionalLight intensity={1.2} position={[5, 5, 5]} color="#7ffcff" />
           <pointLight intensity={0.8} decay={1.6} distance={30} color="#00ffff" position={[0, 2, 3]} />
-          
           <Suspense 
             fallback={
               <Html center style={{ color: "#0ff" }}>
@@ -100,24 +113,13 @@ const AIToolModel: React.FC = () => {
               </Html>
             }
           >
-            <AIToolModelMesh />
+            <RotatingAIToolModel />
           </Suspense>
-          
           <OrbitControls enablePan={false} enableZoom={false} enableRotate={false} />
         </Canvas>
       </div>
-      {/* Overlayed/Underneath text link */}
-      <button
-        onClick={handleClick}
-        className="mt-3 px-4 py-2 rounded bg-[rgba(20,36,52,0.24)] border border-cyan-300/30 shadow text-cyan-200 font-bold tracking-wide text-lg md:text-xl transition hover:scale-105 hover:text-cyan-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300 underline underline-offset-4"
-        style={{
-          textShadow: "0 0 12px #00fff977,0 0 2px #16f8eddd"
-        }}
-        aria-label="Visit AI Blogs"
-        tabIndex={0}
-      >
-        AI Blogs
-      </button>
+      {/* Accessible AI Blogs link below the model */}
+      <AIBlogsText onClick={handleClick} />
     </div>
   );
 };
