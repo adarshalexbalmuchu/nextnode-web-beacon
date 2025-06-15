@@ -136,3 +136,22 @@ input:focus {
   /* optional: scale up slightly for feedback */
   transform: scale(1.09);
 }
+
+/* ===== Hope Page 2 slide-down animation ===== */
+@keyframes slide-down {
+  0% {
+    transform: translateY(-100vh);
+    opacity: 0.5;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+.animate-slide-down {
+  animation: slide-down 0.45s cubic-bezier(.55,1.1,.08,1.00);
+}
