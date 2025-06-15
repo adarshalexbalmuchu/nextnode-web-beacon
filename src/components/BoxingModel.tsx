@@ -8,15 +8,12 @@ const MODEL_PATH = "/Animation_Boxing_Practice_withSkin.glb";
 
 function BoxingModelMesh() {
   const group = useRef<any>();
-  // Always call hooks in the same order
   const gltf = useGLTF(MODEL_PATH, true);
   const { actions } = useAnimations(gltf.animations, group);
 
   React.useEffect(() => {
     if (actions && Object.keys(actions).length > 0) {
-      // Stop all actions first
       Object.values(actions).forEach((action) => action?.stop());
-      // Play the first available animation
       const firstAction = Object.values(actions)[0];
       firstAction?.reset().play();
     }
@@ -37,7 +34,7 @@ function BoxingModelMesh() {
 
   return (
     <group ref={group}>
-      <primitive object={gltf.scene} dispose={null} scale={1.0} />
+      <primitive object={gltf.scene} dispose={null} />
     </group>
   );
 }
@@ -50,15 +47,11 @@ const BoxingModel: React.FC = () => {
   };
 
   return (
-    // Model centered (like old AI Tool)
     <div
       className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center cursor-pointer select-none"
       style={{
-        width: "350px",
-        height: "480px",
         background: "none",
-        // Move a little lower for optimal spacing
-        transform: "translate(-50%, -18%)",
+        // Removed any custom width/height/transform.
       }}
       onClick={handleClick}
       title="Click to visit AI Tools"
@@ -67,15 +60,13 @@ const BoxingModel: React.FC = () => {
       aria-label="Go to AI Tools"
       onKeyDown={e => (e.key === "Enter" || e.key === " ") && handleClick()}
     >
-      <div
-        style={{ width: "100%", height: "400px" }}
-      >
+      <div>
         <Canvas
           camera={{ position: [0, 1, 4], fov: 35 }}
           style={{
             background: "none",
-            width: "100%",
-            height: "100%",
+            width: "100vw",
+            height: "100vh",
             display: "block"
           }}
         >
@@ -101,3 +92,4 @@ const BoxingModel: React.FC = () => {
 };
 
 export default BoxingModel;
+
