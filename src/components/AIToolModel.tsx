@@ -48,8 +48,8 @@ function RotatingAIToolModel() {
 
   return (
     <group ref={group}>
-      {/* Model scale reduced further */}
-      <primitive object={gltf.scene} dispose={null} scale={0.7} />
+      {/* Model scale adjusted to be bigger, but still leaves space below */}
+      <primitive object={gltf.scene} dispose={null} scale={0.85} />
     </group>
   );
 }
@@ -58,7 +58,7 @@ const AIToolModel: React.FC = () => {
   const navigate = useNavigate();
   const handleClick = () => navigate("/ai-blog-loading");
 
-  // The container is smaller, and responsive
+  // The container is larger, but still leaves room for scroll down button
   return (
     <div
       className="
@@ -72,8 +72,8 @@ const AIToolModel: React.FC = () => {
       aria-label="Go to AI Blog"
       onKeyDown={e => (e.key === "Enter" || e.key === " ") && handleClick()}
       style={{
-        height: "250px", // much smaller than before
-        maxWidth: "340px",
+        height: "320px", // Bigger, but not too big
+        maxWidth: "400px",
         minHeight: 0,
       }}
     >
