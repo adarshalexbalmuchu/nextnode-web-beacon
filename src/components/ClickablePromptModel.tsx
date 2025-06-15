@@ -100,8 +100,18 @@ const ClickablePromptModel: React.FC = () => {
         </Suspense>
         <OrbitControls enablePan={false} enableZoom={false} enableRotate={false} />
       </Canvas>
-      {/* "Clicktoread" label: small and higher up */}
-      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 bg-black/60 text-yellow-400 rounded px-1.5 py-[1px] text-[9px] font-semibold pointer-events-none select-none backdrop-blur-sm shadow-sm max-w-[68px] w-auto h-5 flex items-center justify-center">
+      {/* "Clicktoread" label: ultra small, especially on mobile */}
+      <div className="
+        absolute bottom-24 left-1/2 -translate-x-1/2
+        bg-black/70 text-yellow-400 rounded
+        px-1 py-[1.5px]
+        text-[7px] sm:text-[8px] md:text-[8.5px]
+        font-semibold pointer-events-none select-none
+        backdrop-blur-sm shadow-sm
+        max-w-[48px] w-auto h-4 flex items-center justify-center
+        text-center
+        z-30
+      ">
         Clicktoread
       </div>
     </div>
