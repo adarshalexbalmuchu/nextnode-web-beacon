@@ -58,7 +58,7 @@ const CasualWalkModel: React.FC = () => {
       title="Click to visit AI Blog"
     >
       <Canvas
-        camera={{ position: [0, -0.5, 5], fov: 45 }}
+        camera={{ position: [0, 1.5, 5], fov: 45 }}
         style={{
           background: "none",
           width: "100%",
