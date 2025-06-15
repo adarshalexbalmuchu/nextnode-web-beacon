@@ -48,8 +48,8 @@ function RotatingAIToolModel() {
 
   return (
     <group ref={group}>
-      {/* Model scale set to 2 (200%) */}
-      <primitive object={gltf.scene} dispose={null} scale={2} />
+      {/* Model scale set to 1 (100%) */}
+      <primitive object={gltf.scene} dispose={null} scale={1} />
     </group>
   );
 }
