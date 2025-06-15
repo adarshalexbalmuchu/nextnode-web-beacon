@@ -25,7 +25,7 @@ const Index = () => {
       touchEndY.current !== null &&
       touchStartY.current - touchEndY.current > 60 // user swiped up by >60px
     ) {
-      navigate("/hope-page-2");
+      navigate("/hope-loading");
     }
     touchStartY.current = null;
     touchEndY.current = null;
@@ -51,7 +51,7 @@ const Index = () => {
       mouseEndY.current !== null &&
       mouseStartY.current - mouseEndY.current > 60 // drag up by >60px
     ) {
-      navigate("/hope-page-2");
+      navigate("/hope-loading");
     }
     mouseActive.current = false;
     mouseStartY.current = null;

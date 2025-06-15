@@ -15,6 +15,7 @@ import AnimationPreview from "./pages/AnimationPreview";
 import React from "react";
 import AIBlogModelLoadingPage from "@/components/AIBlogModelLoadingPage";
 import HopePage2 from "@/pages/HopePage2";
+import HopePageLoading from "@/pages/HopePageLoading";
 
 const queryClient = new QueryClient();
 
@@ -49,6 +50,10 @@ const App = () => {
             <Route path="/ai-tools" element={<AITools />} />
             {/* Animation Preview */}
             <Route path="/animations" element={<AnimationPreview />} />
+            {/* Hope Page 2 Loading transition */}
+            <Route path="/hope-loading" element={
+              React.createElement(require("./pages/HopePageLoading").default)
+            } />
             {/* Hope Page 2 with slide-down */}
             <Route path="/hope-page-2" element={<HopePage2 />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

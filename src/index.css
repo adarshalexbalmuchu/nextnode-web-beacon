@@ -155,3 +155,35 @@ input:focus {
 .animate-slide-down {
   animation: slide-down 0.45s cubic-bezier(.55,1.1,.08,1.00);
 }
+
+/* ===== Hope Loading Page Flash-Down-Up Animation ===== */
+@keyframes hope-flash-fast {
+  0% {
+    opacity: 1;
+    transform: translateY(-120vh) scale(1.08) skewY(-6deg);
+    filter: brightness(2) blur(0px);
+  }
+  32% {
+    opacity: 1;
+    transform: translateY(68vh) scale(1.33) skewY(8deg);
+    filter: brightness(2.7) blur(2px);
+  }
+  55% {
+    opacity: 1;
+    transform: translateY(-32vh) scale(0.93) skewY(-5deg);
+    filter: brightness(2.4) blur(0px);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(14vh) scale(1.06) skewY(2deg);
+    filter: brightness(2.1) blur(0.5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) skewY(0);
+    filter: brightness(2.6) blur(0px);
+  }
+}
+.animate-hope-flash-fast {
+  animation: hope-flash-fast 0.49s cubic-bezier(0.6,0,0.7,1) 1;
+}
