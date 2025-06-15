@@ -11,6 +11,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AuthPage from "./pages/Auth";
 import AIBlog from "./pages/AIBlog";
 import AITools from "./pages/AITools";
+import AICourses from "./pages/AICourses";
 import AnimationPreview from "./pages/AnimationPreview";
 import React from "react";
 
