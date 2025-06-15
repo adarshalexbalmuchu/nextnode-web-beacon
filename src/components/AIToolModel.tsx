@@ -1,3 +1,4 @@
+
 import React, { Suspense, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, OrbitControls, useGLTF, useAnimations } from "@react-three/drei";
@@ -48,77 +49,50 @@ function RotatingAIToolModel() {
   );
 }
 
-// Separated AI Blog interactive link/text (text changed and margin reduced)
-function AIBlogText({ onClick }: { onClick: () => void }) {
-  return (
-    <button
-      onClick={onClick}
-      className="mt-2 px-4 py-2 rounded bg-[rgba(20,36,52,0.24)] border border-cyan-300/30 shadow text-cyan-200 font-extrabold tracking-wide text-xl md:text-2xl animate-fade-in hover-scale focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300 underline underline-offset-4"
-      style={{
-        textShadow: "0 0 18px #00fff999,0 0 2px #16f8edee"
-      }}
-      aria-label="Visit AI Blog"
-      tabIndex={0}
-    >
-      AI Blog
-    </button>
-  );
-}
-
 const AIToolModel: React.FC = () => {
   const navigate = useNavigate();
-  // Change here: go to /ai-blog-loading instead of /ai-blog
   const handleClick = () => navigate("/ai-blog-loading");
 
+  // Use bottom-right position and sizing like old BoxingModel (no text link)
   return (
     <div
-      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center cursor-pointer select-none"
+      className="fixed bottom-6 right-8 z-20 cursor-pointer flex items-end"
       style={{
-        width: "350px",
-        height: "480px",
+        width: "300px",
+        height: "350px",
         background: "none",
-        // Model stays centered, moved lower for more optimal spacing
-        transform: "translate(-50%, -18%)"
       }}
+      onClick={handleClick}
+      title="Click to visit AI Blog"
+      tabIndex={0}
+      role="button"
+      aria-label="Go to AI Blog"
+      onKeyDown={e => (e.key === "Enter" || e.key === " ") && handleClick()}
     >
-      <div
-        style={{ width: "100%", height: "400px" }}
-        onClick={handleClick}
-        title="Click to visit AI Blog"
-        tabIndex={0}
-        role="button"
-        aria-label="Go to AI Blog"
-        className="outline-none"
-        onKeyDown={e => (e.key === "Enter" || e.key === " ") && handleClick()}
+      <Canvas
+        camera={{ position: [0, 1, 4], fov: 35 }}
+        style={{
+          background: "none",
+          width: "100%",
+          height: "100%",
+        }}
       >
-        <Canvas
-          camera={{ position: [0, 1, 4], fov: 35 }}
-          style={{
-            background: "none",
-            width: "100%",
-            height: "100%",
-            display: "block"
-          }}
+        <ambientLight intensity={0.6} />
+        <directionalLight intensity={1.2} position={[5, 5, 5]} color="#7ffcff" />
+        <pointLight intensity={0.8} decay={1.6} distance={30} color="#00ffff" position={[0, 2, 3]} />
+        <Suspense 
+          fallback={
+            <Html center style={{ color: "#0ff" }}>
+              <div style={{ textAlign: "center", fontSize: "16px" }}>
+                <div>Loading AI Tool...</div>
+              </div>
+            </Html>
+          }
         >
-          <ambientLight intensity={0.6} />
-          <directionalLight intensity={1.2} position={[5, 5, 5]} color="#7ffcff" />
-          <pointLight intensity={0.8} decay={1.6} distance={30} color="#00ffff" position={[0, 2, 3]} />
-          <Suspense 
-            fallback={
-              <Html center style={{ color: "#0ff" }}>
-                <div style={{ textAlign: "center", fontSize: "16px" }}>
-                  <div>Loading AI Tool...</div>
-                </div>
-              </Html>
-            }
-          >
-            <RotatingAIToolModel />
-          </Suspense>
-          <OrbitControls enablePan={false} enableZoom={false} enableRotate={false} />
-        </Canvas>
-      </div>
-      {/* Accessible AI Blog link just below the model */}
-      <AIBlogText onClick={handleClick} />
+          <RotatingAIToolModel />
+        </Suspense>
+        <OrbitControls enablePan={false} enableZoom={false} enableRotate={false} />
+      </Canvas>
     </div>
   );
 };

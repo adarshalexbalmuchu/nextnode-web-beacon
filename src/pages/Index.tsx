@@ -9,10 +9,10 @@ const Index = () => {
     <div className="min-h-screen w-full flex flex-col relative bg-transparent overflow-x-hidden">
       {/* Futuristic animated background layer */}
       <Background />
-      {/* AI Tool animation in the center that opens AI Courses */}
-      <AIToolModel />
-      {/* Boxing animation on the right that opens AI Tools */}
+      {/* Boxing animation in the center */}
       <BoxingModel />
+      {/* AI Tool animation on the right that opens AI Courses */}
+      <AIToolModel />
       <Header />
     </div>
   );
