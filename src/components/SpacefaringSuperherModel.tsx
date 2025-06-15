@@ -46,7 +46,7 @@ function SpacefaringSuperherModelMesh() {
 
   return (
     <group ref={group}>
-      <primitive object={gltf.scene} dispose={null} scale={1.5} />
+      <primitive object={gltf.scene} dispose={null} scale={1.35} />
     </group>
   );
 }
