@@ -1,4 +1,3 @@
-
 import React, { Suspense, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, OrbitControls, useGLTF, useAnimations } from "@react-three/drei";
@@ -49,26 +48,25 @@ function RotatingAIToolModel() {
   );
 }
 
-// Separated AI Blogs interactive link/text
-function AIBlogsText({ onClick }: { onClick: () => void }) {
+// Separated AI Blog interactive link/text (text changed and margin reduced)
+function AIBlogText({ onClick }: { onClick: () => void }) {
   return (
     <button
       onClick={onClick}
-      className="mt-5 px-4 py-2 rounded bg-[rgba(20,36,52,0.24)] border border-cyan-300/30 shadow text-cyan-200 font-extrabold tracking-wide text-xl md:text-2xl animate-fade-in hover-scale focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300 underline underline-offset-4"
+      className="mt-2 px-4 py-2 rounded bg-[rgba(20,36,52,0.24)] border border-cyan-300/30 shadow text-cyan-200 font-extrabold tracking-wide text-xl md:text-2xl animate-fade-in hover-scale focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300 underline underline-offset-4"
       style={{
         textShadow: "0 0 18px #00fff999,0 0 2px #16f8edee"
       }}
-      aria-label="Visit AI Blogs"
+      aria-label="Visit AI Blog"
       tabIndex={0}
     >
-      AI Blogs
+      AI Blog
     </button>
   );
 }
 
 const AIToolModel: React.FC = () => {
   const navigate = useNavigate();
-  // Click handler for navigation
   const handleClick = () => navigate("/ai-blog");
 
   return (
@@ -78,14 +76,14 @@ const AIToolModel: React.FC = () => {
         width: "350px",
         height: "480px",
         background: "none",
-        // Move model and text slightly down for better desktop/mobile positioning
-        transform: "translate(-50%, -22%)"
+        // Model stays centered, slightly up for more optimal spacing
+        transform: "translate(-50%, -28%)"
       }}
     >
       <div
         style={{ width: "100%", height: "400px" }}
         onClick={handleClick}
-        title="Click to visit AI Blogs"
+        title="Click to visit AI Blog"
         tabIndex={0}
         role="button"
         aria-label="Go to AI Blog"
@@ -118,8 +116,8 @@ const AIToolModel: React.FC = () => {
           <OrbitControls enablePan={false} enableZoom={false} enableRotate={false} />
         </Canvas>
       </div>
-      {/* Accessible AI Blogs link below the model */}
-      <AIBlogsText onClick={handleClick} />
+      {/* Accessible AI Blog link just below the model */}
+      <AIBlogText onClick={handleClick} />
     </div>
   );
 };
