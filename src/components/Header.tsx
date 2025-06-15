@@ -1,6 +1,5 @@
-
 import React from "react";
-import { Search, User, LayoutDashboard, LogIn, LogOut } from "lucide-react";
+import { Search, User, LayoutDashboard } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
@@ -23,15 +22,18 @@ const Header = () => {
     allLinks.splice(1, 0, { name: "Dashboard", href: "/admin" });
   }
 
-  // Role-based dashboard (for right-side icon)
-  let dashboardHref: string | null = null;
-  if (role === "admin") dashboardHref = "/admin";
-  else if (role === "author" || role === "user") dashboardHref = "/dashboard";
+  // Remove all authentication buttons, only keep the User icon
+  // User icon is clickable:
+  //   If not logged in, click navigates to /auth
+  //   If logged in as admin, click navigates to /admin
 
-  const handleSignIn = () => navigate("/auth");
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    navigate("/");
+  const handleUserIcon = () => {
+    if (!user) {
+      navigate("/auth");
+    } else if (role === "admin") {
+      navigate("/admin");
+    }
+    // If user is logged in but not admin, do nothing/silent
   };
 
   return (
@@ -56,12 +58,12 @@ const Header = () => {
           </a>
         ))}
       </nav>
-      {/* Icons */}
+      {/* Right Side: Only User Icon & Dashboard link if admin */}
       <div className="flex items-center gap-5 text-white">
-        {/* Dashboard button for admin/user/author */}
-        {dashboardHref && (
+        {/* Dashboard button for admin */}
+        {user && role === "admin" && (
           <a
-            href={dashboardHref}
+            href="/admin"
             className="hover:text-cyan-400 focus:outline-none transition-colors"
             title="Dashboard"
             aria-label="Dashboard"
@@ -69,29 +71,15 @@ const Header = () => {
             <LayoutDashboard size={22} />
           </a>
         )}
-        <button className="hover:text-cyan-400 focus:outline-none">
-          <Search size={22} />
-        </button>
-        <button className="hover:text-cyan-400 focus:outline-none">
+        {/* Only one User (admin human) icon, handles login/dashboard */}
+        <button
+          className="hover:text-cyan-400 focus:outline-none"
+          onClick={handleUserIcon}
+          title={!user ? "Sign In" : role === "admin" ? "Admin Dashboard" : ""}
+          aria-label="User Icon"
+        >
           <User size={22} />
         </button>
-        {!user ? (
-          <button
-            onClick={handleSignIn}
-            className="ml-2 flex items-center gap-1 px-3 py-1 bg-cyan-700 text-white rounded hover:bg-cyan-600 transition"
-            aria-label="Sign In"
-          >
-            <LogIn size={16} /> Sign In
-          </button>
-        ) : (
-          <button
-            onClick={handleSignOut}
-            className="ml-2 flex items-center gap-1 px-3 py-1 bg-gray-700 text-white rounded hover:bg-gray-600 transition"
-            aria-label="Sign Out"
-          >
-            <LogOut size={16} /> Sign Out
-          </button>
-        )}
       </div>
     </header>
   );
