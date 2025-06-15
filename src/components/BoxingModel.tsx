@@ -48,10 +48,9 @@ const BoxingModel: React.FC = () => {
 
   return (
     <div
-      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center cursor-pointer select-none"
+      className="fixed inset-0 z-20 flex items-center justify-center cursor-pointer select-none"
       style={{
         background: "none",
-        // Removed any custom width/height/transform.
       }}
       onClick={handleClick}
       title="Click to visit AI Tools"
@@ -60,36 +59,33 @@ const BoxingModel: React.FC = () => {
       aria-label="Go to AI Tools"
       onKeyDown={e => (e.key === "Enter" || e.key === " ") && handleClick()}
     >
-      <div>
-        <Canvas
-          camera={{ position: [0, 1, 4], fov: 35 }}
-          style={{
-            background: "none",
-            width: "100vw",
-            height: "100vh",
-            display: "block"
-          }}
+      <Canvas
+        camera={{ position: [0, 1, 4], fov: 35 }}
+        style={{
+          background: "none",
+          width: "100vw",
+          height: "100vh",
+          display: "block"
+        }}
+      >
+        <ambientLight intensity={0.6} />
+        <directionalLight intensity={1.2} position={[5, 5, 5]} color="#7ffcff" />
+        <pointLight intensity={0.8} decay={1.6} distance={30} color="#00ffff" position={[0, 2, 3]} />
+        <Suspense 
+          fallback={
+            <Html center style={{ color: "#0ff" }}>
+              <div style={{ textAlign: "center", fontSize: "16px" }}>
+                <div>Loading Boxing...</div>
+              </div>
+            </Html>
+          }
         >
-          <ambientLight intensity={0.6} />
-          <directionalLight intensity={1.2} position={[5, 5, 5]} color="#7ffcff" />
-          <pointLight intensity={0.8} decay={1.6} distance={30} color="#00ffff" position={[0, 2, 3]} />
-          <Suspense 
-            fallback={
-              <Html center style={{ color: "#0ff" }}>
-                <div style={{ textAlign: "center", fontSize: "16px" }}>
-                  <div>Loading Boxing...</div>
-                </div>
-              </Html>
-            }
-          >
-            <BoxingModelMesh />
-          </Suspense>
-          <OrbitControls enablePan={false} enableZoom={false} enableRotate={false} />
-        </Canvas>
-      </div>
+          <BoxingModelMesh />
+        </Suspense>
+        <OrbitControls enablePan={false} enableZoom={false} enableRotate={false} />
+      </Canvas>
     </div>
   );
 };
 
 export default BoxingModel;
-
