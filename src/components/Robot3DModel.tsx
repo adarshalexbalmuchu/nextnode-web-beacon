@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, OrbitControls, useGLTF } from "@react-three/drei";
 
-const MODEL_PATH = "/AI_Blog_0615040357_texture.glb";
+const MODEL_PATH = "./AI_Blog_0615040357_texture.glb";
 
 function RobotModel() {
   const gltf = useGLTF(MODEL_PATH);
