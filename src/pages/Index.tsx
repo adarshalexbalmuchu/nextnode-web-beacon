@@ -3,7 +3,6 @@ import React from "react";
 import Header from "@/components/Header";
 import Background from "@/components/Background";
 import AIToolModel from "@/components/AIToolModel";
-import ClickablePromptModel from "@/components/ClickablePromptModel";
 
 const Index = () => {
   return (
@@ -19,11 +18,8 @@ const Index = () => {
         <Background />
         <div className="flex flex-1 flex-col items-center justify-start relative z-10 min-h-0 w-full">
           <Header />
-          {/* Models directly below header, centered */}
+          {/* Center AI Blog (AIToolModel) below the header */}
           <div className="flex flex-col items-center w-full pt-8 gap-7">
-            <div className="w-full max-w-2xl flex items-center justify-center">
-              <ClickablePromptModel scale={0.1} />
-            </div>
             <div className="w-full max-w-2xl flex items-center justify-center">
               <AIToolModel />
             </div>
@@ -62,4 +58,3 @@ const Index = () => {
 };
 
 export default Index;
-
