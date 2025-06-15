@@ -1,15 +1,15 @@
 
 import Header from "@/components/Header";
 import Background from "@/components/Background";
-import Robot3DModel from "@/components/Robot3DModel";
+import CasualWalkModel from "@/components/CasualWalkModel";
 
 const Index = () => {
   return (
     <div className="min-h-screen w-full flex flex-col relative bg-transparent overflow-x-hidden">
       {/* Futuristic animated background layer */}
       <Background />
-      {/* Main robot in the center, positioned lower */}
-      <Robot3DModel />
+      {/* Casual walk animation in the center that opens AI Blog */}
+      <CasualWalkModel />
       <Header />
     </div>
   );
