@@ -1,8 +1,7 @@
 
 import React from "react";
-import { Search, User, LayoutDashboard } from "lucide-react";
+import { User } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
-import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 
 const navLinks = [
@@ -43,7 +42,7 @@ const Header = () => {
           alt="NextNode Logo"
           className="h-12 w-auto drop-shadow-md cursor-pointer transition-all duration-200 logo-hover-glow"
           style={{
-            filter: "brightness(1.35) drop-shadow(0 0 10px #0ff)", // Lowered brightness & glow
+            filter: "brightness(1.08)", // Subtle default brightness, no constant glow
           }}
           draggable={false}
           onClick={handleLogoClick}
@@ -77,3 +76,4 @@ const Header = () => {
 };
 
 export default Header;
+
