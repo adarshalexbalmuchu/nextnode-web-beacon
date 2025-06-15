@@ -90,7 +90,7 @@ const ClickablePromptModel: React.FC = () => {
               <div style={{ textAlign: "center", fontSize: "16px" }}>
                 <div>Loading Clicktoread 3D Model...</div>
                 <div style={{ fontSize: "12px" }}>
-                  If stuck, <a href={MODEL_PATH} style={{ textDecoration: "underline", color: "#ffdb3a" }} target="_blank" rel="noopener noreferrer">test the GLB link</a>
+                  If stuck, <a href={"/Clicktoread.glb"} style={{ textDecoration: "underline", color: "#ffdb3a" }} target="_blank" rel="noopener noreferrer">test the GLB link</a>
                 </div>
               </div>
             </Html>
@@ -100,20 +100,6 @@ const ClickablePromptModel: React.FC = () => {
         </Suspense>
         <OrbitControls enablePan={false} enableZoom={false} enableRotate={false} />
       </Canvas>
-      {/* "Clicktoread" label: extra small for all screens */}
-      <div className="
-        absolute bottom-28 left-1/2 -translate-x-1/2
-        bg-black/70 text-yellow-400 rounded
-        px-[2px] py-px
-        text-[5px] sm:text-[6px] md:text-[7px]
-        font-semibold pointer-events-none select-none
-        backdrop-blur-sm shadow-sm
-        max-w-[24px] w-auto h-2 flex items-center justify-center
-        text-center
-        z-30
-      ">
-        Clicktoread
-      </div>
     </div>
   );
 };
