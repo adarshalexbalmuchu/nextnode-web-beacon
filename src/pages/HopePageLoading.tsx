@@ -1,9 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-// Use the same logo image as in LoadingPage
-const LOGO_SRC = "/lovable-uploads/55b69b94-d123-47b8-ad9e-8f72a7b53471.png";
+import AIToolModel from "@/components/AIToolModel";
 
 const HopePageLoading: React.FC = () => {
   const navigate = useNavigate();
@@ -11,32 +9,36 @@ const HopePageLoading: React.FC = () => {
 
   useEffect(() => {
     setStart(true);
-    // Increase duration for a much slower and more visible animation (1.7s)
     const timeout = setTimeout(() => {
       navigate("/hope-page-2", { replace: true });
-    }, 1700);
+    }, 1700); // Long enough to see animation
     return () => clearTimeout(timeout);
   }, [navigate]);
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-transparent">
-      {/* Futuristic Background (match HopePage2) */}
+      {/* Futuristic Background (matches HopePage2) */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[hsl(var(--background))] via-[hsl(var(--background))] to-[hsl(var(--card))]" />
-      {/* Animated logo "down-up flash" */}
-      <img
-        src={LOGO_SRC}
-        alt="Loading Flash"
-        className={`w-44 h-44 sm:w-56 sm:h-56 md:w-72 md:h-72 object-contain ${
+      {/* Animated AI Tool 3D Model with entrance flash */}
+      <div
+        className={`w-full h-full flex items-center justify-center ${
           start ? "animate-hope-flash-fast" : ""
         }`}
         style={{
-          filter: "brightness(2.5) drop-shadow(0 0 60px #0ff) drop-shadow(0 0 130px #00fff7)",
+          // Make sure the 3D model looks bright during animation
+          filter:
+            "brightness(2.5) drop-shadow(0 0 60px #0ff) drop-shadow(0 0 130px #00fff7)",
           willChange: "transform, opacity",
         }}
-        draggable={false}
-      />
+      >
+        {/* AIToolModel fills the loading screen, disables pointer-events */}
+        <div className="w-64 h-64 sm:w-80 sm:h-80 md:w-[26rem] md:h-[26rem] pointer-events-none">
+          <AIToolModel />
+        </div>
+      </div>
     </div>
   );
 };
 
 export default HopePageLoading;
+
