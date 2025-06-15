@@ -58,13 +58,24 @@ const AIToolModel: React.FC = () => {
   const navigate = useNavigate();
   const handleClick = () => navigate("/ai-blog-loading");
 
+  // Centered fixed container instead of bottom right
   return (
     <div
-      className="fixed bottom-6 right-8 z-20 cursor-pointer flex items-end"
+      className="
+        fixed 
+        left-1/2 top-1/2 
+        z-30
+        flex items-center justify-center
+        cursor-pointer
+        select-none
+        translate-x-[-50%]
+        translate-y-[-50%]
+        w-[320px] h-[380px]
+        sm:w-[220px] sm:h-[260px]
+      "
       style={{
-        width: "300px",
-        height: "350px",
         background: "none",
+        transform: "translate(-50%, -50%)", // Center the element
       }}
       onClick={handleClick}
       title="Click to visit AI Blog"
@@ -105,3 +116,4 @@ const AIToolModel: React.FC = () => {
 };
 
 export default AIToolModel;
+
