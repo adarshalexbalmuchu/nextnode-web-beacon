@@ -53,11 +53,12 @@ const BoxingModel: React.FC = () => {
 
   return (
     <div
-      className="absolute right-8 top-1/2 -translate-y-1/2 z-20 cursor-pointer"
+      className="fixed right-8 top-1/2 z-20 cursor-pointer flex items-center"
       style={{
         width: "300px",
         height: "400px",
         background: "none",
+        transform: "translateY(-50%)", // Centered vertically
       }}
       onClick={handleClick}
       title="Click to visit AI Tools"
@@ -93,3 +94,4 @@ const BoxingModel: React.FC = () => {
 };
 
 export default BoxingModel;
+
