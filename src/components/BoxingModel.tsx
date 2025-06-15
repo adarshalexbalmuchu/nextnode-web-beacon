@@ -4,10 +4,12 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, OrbitControls, useGLTF, useAnimations } from "@react-three/drei";
 import { useNavigate } from "react-router-dom";
 
+// DOUBLE-CHECK THIS FILENAME matches your upload in public/
 const MODEL_PATH = "/Animation_Boxing_Practice_withSkin.glb";
 
 function BoxingModelMesh() {
   const group = useRef<any>();
+  // This will error if the file doesn't exist or path is wrong
   const gltf = useGLTF(MODEL_PATH, true);
   const { actions } = useAnimations(gltf.animations, group);
 
@@ -23,9 +25,17 @@ function BoxingModelMesh() {
     return (
       <Html center>
         <div style={{ color: "#0ff", textAlign: "center", fontSize: "14px" }}>
-          <div>Boxing Animation</div>
+          <div>Boxing Animation Not Found</div>
           <div style={{ fontSize: "12px", opacity: 0.7 }}>
-            Loading...
+            The 3D model file might be missing.<br />
+            <a
+              href={MODEL_PATH}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ textDecoration: "underline", color: "#7ffcff" }}
+            >
+              Test if GLB is accessible
+            </a>
           </div>
         </div>
       </Html>
@@ -75,7 +85,10 @@ const BoxingModel: React.FC = () => {
           fallback={
             <Html center style={{ color: "#0ff" }}>
               <div style={{ textAlign: "center", fontSize: "16px" }}>
-                <div>Loading Boxing...</div>
+                <div>Loading Boxing 3D Model...</div>
+                <div style={{ fontSize: "12px" }}>
+                  If stuck, <a href={MODEL_PATH} style={{ textDecoration: "underline", color: "#7ffcff" }} target="_blank" rel="noopener noreferrer">test the GLB link</a>
+                </div>
               </div>
             </Html>
           }

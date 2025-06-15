@@ -4,16 +4,14 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, OrbitControls, useGLTF, useAnimations } from "@react-three/drei";
 import { useNavigate } from "react-router-dom";
 
-// Path to GLB model (must be present in public directory)
-const MODEL_PATH = "/AI_Tool_0615044424_texture.glb"; // Ensure this matches the name in /public
+// DOUBLE-CHECK THIS FILENAME matches your upload in public/
+const MODEL_PATH = "/AI_Tool_0615044424_texture.glb";
 
-// Reusable rotating mesh for AI tool model
 function RotatingAIToolModel() {
   const group = useRef<any>();
   const gltf = useGLTF(MODEL_PATH, true);
   const { actions } = useAnimations(gltf.animations, group);
 
-  // Play idle animation (if available)
   React.useEffect(() => {
     if (actions && Object.keys(actions).length > 0) {
       Object.values(actions).forEach((action) => action?.stop());
@@ -22,7 +20,6 @@ function RotatingAIToolModel() {
     }
   }, [actions]);
 
-  // Continuous rotation around Y-axis
   useFrame(() => {
     if (group.current) {
       group.current.rotation.y += 0.009;
@@ -33,9 +30,17 @@ function RotatingAIToolModel() {
     return (
       <Html center>
         <div style={{ color: "#0ff", textAlign: "center", fontSize: "14px" }}>
-          <div>AI Tool Animation</div>
+          <div>AI Tool Animation Not Found</div>
           <div style={{ fontSize: "12px", opacity: 0.7 }}>
-            Loading...
+            The 3D model file might be missing.<br />
+            <a
+              href={MODEL_PATH}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ textDecoration: "underline", color: "#7ffcff" }}
+            >
+              Test if GLB is accessible
+            </a>
           </div>
         </div>
       </Html>
@@ -53,7 +58,6 @@ const AIToolModel: React.FC = () => {
   const navigate = useNavigate();
   const handleClick = () => navigate("/ai-blog-loading");
 
-  // Use bottom-right position and sizing like old BoxingModel (no text link)
   return (
     <div
       className="fixed bottom-6 right-8 z-20 cursor-pointer flex items-end"
@@ -84,7 +88,10 @@ const AIToolModel: React.FC = () => {
           fallback={
             <Html center style={{ color: "#0ff" }}>
               <div style={{ textAlign: "center", fontSize: "16px" }}>
-                <div>Loading AI Tool...</div>
+                <div>Loading AI Tool 3D Model...</div>
+                <div style={{ fontSize: "12px" }}>
+                  If stuck, <a href={MODEL_PATH} style={{ textDecoration: "underline", color: "#7ffcff" }} target="_blank" rel="noopener noreferrer">test the GLB link</a>
+                </div>
               </div>
             </Html>
           }
