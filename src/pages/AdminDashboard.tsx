@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -11,11 +12,11 @@ import AnalyticsSimple from "@/components/admin/AnalyticsSimple";
 
 export default function AdminDashboard() {
   return (
-    <>
+    <div className="min-h-screen w-full relative overflow-hidden">
       <Background />
       <Header />
       <ProtectedRoute requiredRole="admin">
-        <div className="min-h-screen w-full relative flex flex-col items-center bg-gradient-futuristic pt-10">
+        <div className="min-h-screen w-full relative flex flex-col items-center pt-10 z-10">
           <Card className="glass-panel max-w-6xl w-full mx-auto">
             <CardHeader>
               <CardTitle className="text-glow flex items-center gap-3 text-2xl">
@@ -62,6 +63,6 @@ export default function AdminDashboard() {
           </Card>
         </div>
       </ProtectedRoute>
-    </>
+    </div>
   );
 }
