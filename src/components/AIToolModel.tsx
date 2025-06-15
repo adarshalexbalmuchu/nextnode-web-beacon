@@ -59,12 +59,13 @@ const AIToolModel: React.FC = () => {
   const navigate = useNavigate();
   const handleClick = () => navigate("/ai-blog-loading");
 
-  // Fullscreen container to avoid cropping, always centered
+  // Fullscreen, always centered, canvas stretches to window
   return (
     <div
       className="
         fixed inset-0 z-30
         flex items-center justify-center
+        w-screen h-screen
         cursor-pointer select-none
         bg-transparent
       "
@@ -75,37 +76,34 @@ const AIToolModel: React.FC = () => {
       aria-label="Go to AI Blog"
       onKeyDown={e => (e.key === "Enter" || e.key === " ") && handleClick()}
     >
-      <div className="w-full h-full flex items-center justify-center">
-        <Canvas
-          camera={{ position: [0, 1, 4], fov: 35 }}
-          style={{
-            background: "none",
-            width: "100%",
-            height: "100%",
-            maxWidth: "700px",
-            maxHeight: "88vh"
-          }}
-        >
-          <ambientLight intensity={0.6} />
-          <directionalLight intensity={1.2} position={[5, 5, 5]} color="#7ffcff" />
-          <pointLight intensity={0.8} decay={1.6} distance={30} color="#00ffff" position={[0, 2, 3]} />
-          <Suspense 
-            fallback={
-              <Html center style={{ color: "#0ff" }}>
-                <div style={{ textAlign: "center", fontSize: "16px" }}>
-                  <div>Loading AI Tool 3D Model...</div>
-                  <div style={{ fontSize: "12px" }}>
-                    If stuck, <a href={MODEL_PATH} style={{ textDecoration: "underline", color: "#7ffcff" }} target="_blank" rel="noopener noreferrer">test the GLB link</a>
-                  </div>
+      <Canvas
+        camera={{ position: [0, 1.3, 4], fov: 35 }}
+        style={{
+          background: "none",
+          width: "100vw",
+          height: "100vh",
+          display: "block"
+        }}
+      >
+        <ambientLight intensity={0.6} />
+        <directionalLight intensity={1.2} position={[5, 5, 5]} color="#7ffcff" />
+        <pointLight intensity={0.8} decay={1.6} distance={30} color="#00ffff" position={[0, 2, 3]} />
+        <Suspense 
+          fallback={
+            <Html center style={{ color: "#0ff" }}>
+              <div style={{ textAlign: "center", fontSize: "16px" }}>
+                <div>Loading AI Tool 3D Model...</div>
+                <div style={{ fontSize: "12px" }}>
+                  If stuck, <a href={MODEL_PATH} style={{ textDecoration: "underline", color: "#7ffcff" }} target="_blank" rel="noopener noreferrer">test the GLB link</a>
                 </div>
-              </Html>
-            }
-          >
-            <RotatingAIToolModel />
-          </Suspense>
-          <OrbitControls enablePan={false} enableZoom={false} enableRotate={false} />
-        </Canvas>
-      </div>
+              </div>
+            </Html>
+          }
+        >
+          <RotatingAIToolModel />
+        </Suspense>
+        <OrbitControls enablePan={false} enableZoom={false} enableRotate={false} />
+      </Canvas>
     </div>
   );
 };
