@@ -45,11 +45,16 @@ const LoadingPage: React.FC = () => {
         className={
           `w-72 h-72 sm:w-96 sm:h-96 md:w-[28rem] md:h-[28rem] lg:w-[32rem] lg:h-[32rem] object-contain transition-all duration-1000 
           ${glow
-            ? 'brightness-200 drop-shadow-[0_0_48px_cyan] drop-shadow-[0_0_80px_rgba(0,255,255,0.6)] scale-110 animate-logo-glow'
-            : 'brightness-100 scale-100'
+            ? 'brightness-[2.8] drop-shadow-[0_0_68px_cyan] drop-shadow-[0_0_130px_rgba(0,255,255,0.72)] scale-110 animate-logo-glow'
+            : 'brightness-[1.85] scale-100'
           }
           `
         }
+        style={{
+          filter: glow
+            ? "brightness(2.8) drop-shadow(0 0 68px cyan) drop-shadow(0 0 130px rgba(0,255,255,0.72))"
+            : "brightness(1.85)"
+        }}
         draggable={false}
       />
     </div>
@@ -57,4 +62,3 @@ const LoadingPage: React.FC = () => {
 };
 
 export default LoadingPage;
-

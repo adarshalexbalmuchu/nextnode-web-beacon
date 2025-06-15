@@ -17,16 +17,10 @@ const Header = () => {
   const { user, role } = useAuth();
   const navigate = useNavigate();
 
-  // Show Dashboard link if admin
   const allLinks = [...navLinks];
   if (role === "admin") {
     allLinks.splice(1, 0, { name: "Dashboard", href: "/admin" });
   }
-
-  // Remove all authentication buttons, only keep the User icon
-  // User icon is clickable:
-  //   If not logged in, click navigates to /auth
-  //   If logged in as admin, click navigates to /admin
 
   const handleUserIcon = () => {
     if (!user) {
@@ -48,6 +42,9 @@ const Header = () => {
           src="/lovable-uploads/195b39b9-d0a0-4426-b17f-63d73c98d6d3.png"
           alt="NextNode Logo"
           className="h-12 w-auto drop-shadow-md cursor-pointer transition-all duration-200 logo-hover-glow"
+          style={{
+            filter: "brightness(1.35) drop-shadow(0 0 10px #0ff)", // Lowered brightness & glow
+          }}
           draggable={false}
           onClick={handleLogoClick}
         />
@@ -66,7 +63,6 @@ const Header = () => {
       </nav>
       {/* Right Side: Only User Icon */}
       <div className="flex items-center gap-5 text-white">
-        {/* Only one User (admin human) icon, handles login/dashboard */}
         <button
           className="hover:text-cyan-400 focus:outline-none"
           onClick={handleUserIcon}
