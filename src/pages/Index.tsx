@@ -1,3 +1,4 @@
+
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
@@ -25,7 +26,7 @@ const Index = () => {
       touchEndY.current !== null &&
       touchStartY.current - touchEndY.current > 60 // user swiped up by >60px
     ) {
-      navigate("/ai-tool-loading");
+      navigate("/ai-tool-page");
     }
     touchStartY.current = null;
     touchEndY.current = null;
@@ -51,7 +52,7 @@ const Index = () => {
       mouseEndY.current !== null &&
       mouseStartY.current - mouseEndY.current > 60 // drag up by >60px
     ) {
-      navigate("/ai-tool-loading");
+      navigate("/ai-tool-page");
     }
     mouseActive.current = false;
     mouseStartY.current = null;
@@ -78,3 +79,4 @@ const Index = () => {
 };
 
 export default Index;
+

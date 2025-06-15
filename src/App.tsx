@@ -14,7 +14,6 @@ import AICourses from "./pages/AICourses";
 import AnimationPreview from "./pages/AnimationPreview";
 import React from "react";
 import AIBlogModelLoadingPage from "@/components/AIBlogModelLoadingPage";
-import AIToolPageLoading from "@/pages/AIToolPageLoading";
 import AIToolPage from "@/pages/AIToolPage";
 
 const queryClient = new QueryClient();
@@ -50,8 +49,6 @@ const App = () => {
             <Route path="/ai-tools" element={<AITools />} />
             {/* Animation Preview */}
             <Route path="/animations" element={<AnimationPreview />} />
-            {/* AI Tool Page Loading transition */}
-            <Route path="/ai-tool-loading" element={<AIToolPageLoading />} />
             {/* AI Tool Page with slide-down */}
             <Route path="/ai-tool-page" element={<AIToolPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
