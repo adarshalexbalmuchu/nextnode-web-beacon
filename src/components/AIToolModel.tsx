@@ -4,7 +4,6 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, OrbitControls, useGLTF, useAnimations } from "@react-three/drei";
 import { useNavigate } from "react-router-dom";
 
-// DOUBLE-CHECK THIS FILENAME matches your upload in public/
 const MODEL_PATH = "/AI_Tool_0615044424_texture.glb";
 
 function RotatingAIToolModel() {
@@ -49,8 +48,8 @@ function RotatingAIToolModel() {
 
   return (
     <group ref={group}>
-      {/* Reduce model scale by 20% from previous value */}
-      <primitive object={gltf.scene} dispose={null} scale={0.96} />
+      {/* Model scale reduced further */}
+      <primitive object={gltf.scene} dispose={null} scale={0.7} />
     </group>
   );
 }
@@ -59,11 +58,12 @@ const AIToolModel: React.FC = () => {
   const navigate = useNavigate();
   const handleClick = () => navigate("/ai-blog-loading");
 
-  // Place inside regular container (not fixed), centered and responsive
+  // The container is smaller, and responsive
   return (
     <div
       className="
-        flex flex-1 items-center justify-center w-full h-full cursor-pointer select-none bg-transparent
+        flex flex-1 items-center justify-center w-full
+        cursor-pointer select-none bg-transparent
       "
       onClick={handleClick}
       title="Click to visit AI Blog"
@@ -72,7 +72,8 @@ const AIToolModel: React.FC = () => {
       aria-label="Go to AI Blog"
       onKeyDown={e => (e.key === "Enter" || e.key === " ") && handleClick()}
       style={{
-        // Take up available parent (section) space
+        height: "250px", // much smaller than before
+        maxWidth: "340px",
         minHeight: 0,
       }}
     >
@@ -82,7 +83,7 @@ const AIToolModel: React.FC = () => {
           background: "none",
           width: "100%",
           height: "100%",
-          display: "block"
+          display: "block",
         }}
       >
         <ambientLight intensity={0.6} />
@@ -109,4 +110,3 @@ const AIToolModel: React.FC = () => {
 };
 
 export default AIToolModel;
-

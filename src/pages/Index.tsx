@@ -16,12 +16,15 @@ const Index = () => {
       {/* Section 1: Home (existing) */}
       <section className="relative w-full h-screen min-h-screen snap-start flex flex-col">
         <Background />
-        <div className="flex flex-1 flex-col items-center justify-center relative z-10">
-          <AIToolModel />
+        <div className="flex flex-1 flex-col items-center justify-start relative z-10 min-h-0">
           <Header />
+          {/* Model placed below header; give space top and bottom */}
+          <div className="flex flex-col items-center w-full" style={{ marginTop: "32px", marginBottom: "40px" }}>
+            <AIToolModel />
+          </div>
         </div>
-        {/* SCROLL DOWN indicator if you want it visible */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 pointer-events-none flex flex-col items-center z-20">
+        {/* SCROLL DOWN indicator: always visible and clickable */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center z-20 pointer-events-auto">
           <span className="text-cyan-400 text-xs mb-1 tracking-wider animate-fade-in">
             SCROLL DOWN
           </span>
@@ -53,4 +56,3 @@ const Index = () => {
 };
 
 export default Index;
-
